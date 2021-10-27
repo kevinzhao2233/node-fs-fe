@@ -1,0 +1,7 @@
+build
+src/assets
+public
+dist
+.eslintrc.js
+.stylelintrc.js
+src/**/*.d.ts
