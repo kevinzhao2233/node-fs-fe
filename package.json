@@ -9,7 +9,7 @@
   "dependencies": {
     "ant-design-vue": "^2.2.8",
     "vue": "^3.2.16",
-    "vue-router": "^3.5.3"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.5",
