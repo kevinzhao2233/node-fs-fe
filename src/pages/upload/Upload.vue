@@ -13,13 +13,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 64px);
   min-height: 700px;
 
   .upload-container {
     width: 800px;
     height: 400px;
-    margin-top: -60px;
+    margin: -60px 0 0 -60px;
     background: #ffffff77;
     border-radius: 16px;
   }

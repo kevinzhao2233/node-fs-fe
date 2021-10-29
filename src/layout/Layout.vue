@@ -28,7 +28,7 @@ import Sider from './Sider.vue';
   background: transparent;
 }
 .layout {
-  height: 100vh;
+  min-height: 100vh;
   background: url('../assets/bg.png') top / cover no-repeat;
 }
 

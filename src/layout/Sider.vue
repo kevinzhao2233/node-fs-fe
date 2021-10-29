@@ -1,11 +1,32 @@
 <script setup lang="ts">
+import { watch, ref } from '@vue/runtime-core';
+import { useRouter, useRoute } from 'vue-router';
 
+const router = useRouter();
+const route = useRoute();
+
+const activeMenu = ref('upload');
+
+watch(() => route.name, () => {
+  const metaMenu = route.meta.menu as string | undefined;
+  activeMenu.value = metaMenu || activeMenu.value;
+}, { immediate: true });
+
+const toggleMenu = (menu: string) => {
+  router.push({ name: menu });
+};
 </script>
 
 <template>
   <div class="sider-box">
-    <div class="menu-item active">上传文件</div>
-    <div class="menu-item">下载文件</div>
+    <div
+      class="menu-item"
+      :class="{active: activeMenu === 'upload'}"
+      @click="toggleMenu('upload')"><i class="icon ri-upload-cloud-line"></i>上传文件</div>
+    <div
+      class="menu-item"
+      :class="{active: activeMenu === 'download'}"
+      @click="toggleMenu('download')"><i class="icon ri-download-cloud-2-line"></i>下载文件</div>
   </div>
 </template>
 
@@ -30,6 +51,7 @@
 
     &.active {
       border: 2px solid #009dff;
+      padding: 0 18px;
     }
 
     &:hover {
@@ -39,6 +61,11 @@
     &:active {
       background: #ffffff;
       transform: scale(0.9);
+    }
+
+    .icon {
+      font-size: 18px;
+      margin-right: 6px;
     }
   }
 }

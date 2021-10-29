@@ -2434,6 +2434,11 @@ regexpp@^3.2.0:
   resolved "https://r.cnpmjs.org/regexpp/download/regexpp-3.2.0.tgz#0425a2768d8f23bad70ca4b90461fa2f1213e1b2"
   integrity sha1-BCWido2PI7rXDKS5BGH6LxIT4bI=
 
+remixicon@^2.5.0:
+  version "2.5.0"
+  resolved "https://r.cnpmjs.org/remixicon/download/remixicon-2.5.0.tgz#b5e245894a1550aa23793f95daceadbf96ad1a41"
+  integrity sha1-teJFiUoVUKojeT+V2s6tv5atGkE=
+
 request-light@^0.5.4:
   version "0.5.4"
   resolved "https://r.cnpmjs.org/request-light/download/request-light-0.5.4.tgz#497a98c6d8ae49536417a5e2d7f383b934f3e38c"
@@ -3074,7 +3079,7 @@ vue-eslint-parser@^7.10.0:
     lodash "^4.17.21"
     semver "^6.3.0"
 
-vue-router@4:
+vue-router@^4.0.12:
   version "4.0.12"
   resolved "https://r.cnpmjs.org/vue-router/download/vue-router-4.0.12.tgz#8dc792cddf5bb1abcc3908f9064136de7e13c460"
   integrity sha1-jceSzd9bsavMOQj5BkE23n4TxGA=
