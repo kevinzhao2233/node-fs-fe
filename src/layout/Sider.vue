@@ -65,7 +65,7 @@ const toggleMenu = (menu: string) => {
 
     .icon {
       font-size: 18px;
-      margin-right: 6px;
+      margin-right: 8px;
     }
   }
 }

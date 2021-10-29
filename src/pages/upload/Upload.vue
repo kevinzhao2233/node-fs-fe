@@ -4,24 +4,16 @@
 
 <template>
   <div class="container">
-    <div class="upload-container"></div>
+    <div class="upload-container">
+      <h3>上传</h3>
+      <div class="drop-container">
+        <p class="description">拖拽文件到这里，或 <a>选择文件</a></p>
+        <p class="sub-desc">文件最大支持 20MB</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 64px);
-  min-height: 700px;
-
-  .upload-container {
-    width: 800px;
-    height: 400px;
-    margin: -60px 0 0 -60px;
-    background: #ffffff77;
-    border-radius: 16px;
-  }
-}
+@import './upload.scss';
 </style>
