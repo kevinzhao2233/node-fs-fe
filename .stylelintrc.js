@@ -1,5 +1,6 @@
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
+  extends: ['stylelint-config-standard-scss', 'stylelint-config-recommended-vue', 'stylelint-config-recess-order'],
+  customSyntax: 'sugarss',
   rules: {
     // "order/properties-alphabetical-order": true,
     'color-no-invalid-hex': true,
@@ -41,6 +42,8 @@ module.exports = {
     // 是否禁止低优先级的选择器出现在高优先级选择器之后
     'no-descending-specificity': null,
 
-    'selector-pseudo-class-no-unknown': null
+    'selector-pseudo-class-no-unknown': null,
+
+    // 'custom-property-no-missing-var-function': null
   }
 }

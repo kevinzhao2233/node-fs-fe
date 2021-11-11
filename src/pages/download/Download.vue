@@ -9,5 +9,5 @@
 </template>
 
 <style lang="scss">
-@import './download.scss'
+@import "./download.scss"
 </style>
