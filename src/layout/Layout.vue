@@ -5,20 +5,16 @@ import Sider from './Sider.vue';
 
 <template>
   <a-layout class="layout">
-    <a-layout-header>
+    <a-layout-sider class="sider" theme="light" width="240">
       <Header/>
-    </a-layout-header>
-    <a-layout>
-      <a-layout-sider class="sider" theme="light" width="240">
-        <Sider/>
-      </a-layout-sider>
-      <a-layout>
-        <a-layout-content
-          :style="{ margin: 0, minHeight: '280px' }"
-        >
-          <router-view/>
-        </a-layout-content>
-      </a-layout>
+      <Sider/>
+    </a-layout-sider>
+    <a-layout style="overflow: hidden;">
+      <a-layout-content
+        :style="{ margin: 0, minHeight: '280px', overflow: 'auto' }"
+      >
+        <router-view/>
+      </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
@@ -28,16 +24,9 @@ import Sider from './Sider.vue';
   background: transparent;
 }
 .layout {
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 360px;
   background: url('../assets/bg.png') top / cover no-repeat;
-}
-
-.ant-layout-has-sider {
-  background: transparent;
-}
-
-.ant-layout-header {
-  background: transparent;
 }
 
 .sider {

@@ -3,14 +3,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: calc(100vh - 64px);
-  min-height: 700px;
+  min-height: 80vh;
+  padding: 60px 0;
 
   .upload-container {
     width: 800px;
-    min-height: 300px;
     padding: 32px 36px;
-    margin: -60px 0 0 -60px;
+    margin: 0 0 0 -60px;
     background: #ffffffaa;
     border-radius: 16px;
 
@@ -18,114 +17,8 @@
       margin-bottom: 20px;
       font-size: 22px;
       font-weight: 600;
-      color: #676d83;
+      color: #445566;
       letter-spacing: 1px;
-    }
-
-    .drop-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 160px;
-      background: #f0f0fd66;
-      border: 2px dashed #c4c8d7;
-      border-radius: 16px;
-
-      .description {
-        font-size: 16px;
-        text-align: center;
-        letter-spacing: 1px;
-        color: #9ba0b3;
-
-        a {
-          color: #009dff;
-
-          &:visited {
-            color: #009dff;
-          }
-
-          &:hover {
-            color: #00bbff;
-          }
-
-          &:active {
-            color: #0077ff;
-          }
-        }
-      }
-
-      .sub-desc {
-        text-align: center;
-        letter-spacing: 1px;
-        color: #9ba0b3;
-      }
-    }
-
-    .upload-list {
-      margin: 20px 0;
-      padding: 0;
-
-      .upload-file {
-        border: 2px solid #ced2df;
-        list-style: none;
-        border-radius: 16px;
-        height: 90px;
-        padding: 10px 20px;
-
-        .file-container {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          height: 50px;
-
-          .file-content {
-            p {
-              margin: 0;
-            }
-            .file-name {
-              color: #676d83;
-              font-weight: bold;
-              margin-bottom: 2px;
-            }
-            .file-desc {
-              color: #9ba0b3;
-              font-size: 12px;
-
-              :first-child {
-                display: inline-block;
-                width: 50px;
-              }
-              
-            }
-          }
-          .file-action {
-            .icon {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 24px;
-              height: 24px;
-              border-radius: 100%;
-              background: #cdd0db;
-              color: #5a5f74;
-              font-size: 16px;
-
-              &.close {
-                background: #f1c7cc;
-                color: #e82529;
-              }
-            }
-          }
-        }
-
-        .file-process {
-          height: 4px;
-          border-radius: 2px;
-          background: #cdd0db;
-          margin-top: 10px;
-        }
-      }
     }
   }
 }

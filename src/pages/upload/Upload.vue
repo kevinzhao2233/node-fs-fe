@@ -1,4 +1,51 @@
 <script setup lang="ts">
+import { reactive } from '@vue/reactivity';
+import { provide } from '@vue/runtime-core';
+import axios from 'axios';
+import DropBox from './components/DropBox.vue';
+import UploadList from './components/UploadList.vue';
+import { FileKey } from './symbols';
+import { IFile } from './types';
+
+const fileList = reactive<IFile[]>([]);
+
+const chooseFiles = (files: IFile[]) => {
+  fileList.length = 0;
+  fileList.push(...files);
+};
+
+provide(FileKey, fileList);
+
+const sendFile = (file: IFile) => {
+  const formData = new FormData();
+  formData.append('files', file.source);
+  console.log({ formData });
+  axios.post('http://localhost:10001/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    onUploadProgress: (pv: any) => {
+      if (pv.lengthComputable) {
+        const compulate = parseFloat(((pv.loaded / pv.total) * 100).toFixed(1));
+        console.log({ compulate });
+        const index = fileList.findIndex((item) => item.name === file.name);
+        fileList[index].process = compulate;
+      }
+    },
+  }).then((res: any) => {
+    console.log({ res });
+  });
+};
+
+const cancelAll = () => {
+  fileList.length = 0;
+};
+
+const startAll = () => {
+  fileList.forEach((file) => {
+    sendFile(file);
+  });
+};
 
 </script>
 
@@ -6,26 +53,8 @@
   <div class="container">
     <div class="upload-container">
       <h3>上传</h3>
-      <div class="drop-container">
-        <p class="description">拖拽文件到这里，或 <a>选择文件</a></p>
-        <p class="sub-desc">文件最大支持 20MB</p>
-      </div>
-      <ul class="upload-list">
-        <li class="upload-file">
-          <div class="file-container">
-            <div class="file-content">
-              <p class="file-name">图片文件名.jpg</p>
-              <p class="file-desc">
-                <span>68%</span><span>大约还需 12 秒</span>
-              </p>
-            </div>
-            <div class="file-action">
-              <i class="icon close ri-close-line"></i>
-            </div>
-          </div>
-          <div class="file-process"></div>
-        </li>
-      </ul>
+      <DropBox @choose-files="chooseFiles" />
+      <UploadList @start-all="startAll" @cancel-all="cancelAll"/>
     </div>
   </div>
 </template>

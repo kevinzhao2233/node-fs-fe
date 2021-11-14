@@ -3,13 +3,21 @@
 </script>
 
 <template>
-  <div class="logo"></div>
-  <div class="app-tit">NODE FS</div>
+  <div class="header">
+    <div class="logo"></div>
+    <div class="app-tit">NODE FS</div>
+  </div>
 </template>
 
 <style lang="scss">
+.header {
+  width: 240px;
+  height: 80px;
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
+}
 .logo {
-  float: left;
   width: 36px;
   height: 36px;
   margin: 16px 24px 16px 0;
