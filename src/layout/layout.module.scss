@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  height: 100vh;
+  min-height: 360px;
+  background: url(../assets/bg.png);
+}
+
+.sidebar {
+  width: 220px;
+  padding: 24px 12px;
+}
