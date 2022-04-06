@@ -1,6 +1,9 @@
-module.exports = {
-  extends: ['stylelint-config-standard-scss', 'stylelint-config-recommended-vue', 'stylelint-config-recess-order'],
-  customSyntax: 'sugarss',
+module.exports = ({ file, options, env }) => ({
+  extends: [
+    'stylelint-config-standard-scss',
+    'stylelint-config-css-modules',
+    'stylelint-config-recess-order'],
+  customSyntax: file.extname === '.css' ? 'sugarss' : false,
   rules: {
     // "order/properties-alphabetical-order": true,
     'color-no-invalid-hex': true,
@@ -46,4 +49,4 @@ module.exports = {
 
     // 'custom-property-no-missing-var-function': null
   }
-}
+})

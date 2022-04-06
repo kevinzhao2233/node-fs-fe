@@ -1,63 +1,72 @@
 module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   env: {
     browser: true,
     es2021: true,
+    amd: true,
     node: true,
   },
   extends: [
-    'plugin:vue/essential',
-    'airbnb-base',
+    'plugin:react/recommended',
+    'airbnb',
   ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    parser: '@typescript-eslint/parser',
-    sourceType: 'module',
-  },
   plugins: [
-    'vue',
+    'react',
     '@typescript-eslint',
+    'simple-import-sort',
   ],
-  globals: {
-    defineProps: "readonly",
-    defineEmits: "readonly",
-    defineExpose: "readonly",
-    withDefaults: "readonly"
-  },
   rules: {
-    'vue/max-attributes-per-line': ['error', {
-      singleline: 10,
-      multiline: {
-        max: 1,
-        allowFirstLine: false,
-      },
-    }],
-    'vue/html-indent': ['error', 2, {
-      attribute: 1,
-      baseIndent: 1,
-      closeBracket: 0,
-      alignAttributesVertically: true,
-      ignores: [],
-    }],
-    'vue/singleline-html-element-content-newline': 'off',
-    'vue/multiline-html-element-content-newline': 'off',
-    'vue/name-property-casing': ['error', 'PascalCase'],
-    'vue/no-v-html': 'off',
-    'vue/no-multiple-template-root': 'off',
-    'vue/no-v-model-argument': 'off',
+    // TS 项目中关闭此配置，但是打开 @typescript-eslint/indent
+    indent: 'off',
+    // TS 项目中关闭此配置，但是打开 @typescript-eslint/no-unused-vars
+    'no-unused-vars': 'off',
+
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'tsx', 'ts'] }],
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+
+    /**
+     * import 插件相关的
+     */
+    'import/extensions': [1, 'never'],
     'import/no-unresolved': 'off',
-    'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-unused-vars': 'warn',
-    'no-param-reassign': 'off',
-    'no-unused-expressions': 'off',
-    'no-lonely-if': 'off',
-    'no-use-before-define': ['off'],
-    // 'no-shadow': 'off',
-    'prefer-promise-reject-errors': 'off',
-    'symbol-description': 'off',
-    'max-len': ['error', { code: 140, ignoreComments: true, ignoreTrailingComments: true, ignoreStrings: true, ignoreRegExpLiterals: true }]
+
+    '@typescript-eslint/indent': ['error', 2],
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    '@typescript-eslint/explicit-function-return-type': 'off',
+
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+
+    'jsx-a11y/accessible-emoji': 'off',
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight'],
+        aspects: ['invalidHref', 'preferButton'],
+      },
+    ],
   },
 };
