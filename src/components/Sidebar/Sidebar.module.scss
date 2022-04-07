@@ -1,7 +1,22 @@
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  margin: 0 24px 0 0;
+  border: 5px solid #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px -4px #ffffff;
+}
+
 .appTit {
   font-size: 26px;
   font-weight: bold;
   color: #456;
+  margin: 0;
 }
 
 .menuBox {
@@ -21,11 +36,11 @@
   box-sizing: border-box;
   user-select: none;
   cursor: pointer;
-  transition: background ease 0.3s, transform ease-out 0.3s;
+  transition: background ease 0.3s, transform ease-out 0.2s;
   color: #456;
   text-decoration: none;
 
-  &.active {
+  &.activeItem {
     border: 2px solid #009dff;
     padding: 0 18px;
   }
