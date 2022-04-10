@@ -1,4 +1,4 @@
-.logoContainer {
+.logo_container {
   display: flex;
   align-items: center;
 }
@@ -12,19 +12,19 @@
   box-shadow: 0 0 12px -4px #ffffff;
 }
 
-.appTit {
+.app_tit {
   font-size: 26px;
   font-weight: bold;
   color: #456;
   margin: 0;
 }
 
-.menuBox {
+.menu_box {
   padding: 100px 0 0 0;
   box-sizing: border-box;
 }
 
-.menuItem {
+.menu_item {
   margin: 20px 0;
   padding: 0 20px;
   display: flex;
@@ -40,7 +40,7 @@
   color: #456;
   text-decoration: none;
 
-  &.activeItem {
+  &.active_item {
     border: 2px solid #009dff;
     padding: 0 18px;
   }

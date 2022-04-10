@@ -3,7 +3,7 @@ module.exports = ({ file, options, env }) => ({
     'stylelint-config-standard-scss',
     'stylelint-config-css-modules',
     'stylelint-config-recess-order'],
-  customSyntax: file.extname === '.css' ? 'sugarss' : false,
+  customSyntax: 'postcss-scss',
   rules: {
     // "order/properties-alphabetical-order": true,
     'color-no-invalid-hex': true,

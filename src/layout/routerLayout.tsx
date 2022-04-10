@@ -4,7 +4,7 @@ import {
 
 import Sidebar from '@/components/Sidebar/Sidebar';
 import About from '@/views/About/About';
-import Home from '@/views/Home/Home';
+// import Home from '@/views/Home/Home';
 import Upload from '@/views/Upload/Upload';
 
 import style from './layout.module.scss';
@@ -16,11 +16,10 @@ function Router() {
         <div className={style.sidebar}>
           <Sidebar />
         </div>
-        <div className="layout-main">
+        <div className={style.main}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Upload />} />
             <Route path="about" element={<About />} />
-            <Route path="upload" element={<Upload />} />
           </Routes>
         </div>
       </div>
