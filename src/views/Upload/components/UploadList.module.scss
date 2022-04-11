@@ -1,0 +1,131 @@
+.uploadActions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  height: 32px;
+  margin: 20px 0 0;
+
+  :nth-child(n) {
+    margin-left: 8px;
+  }
+}
+
+.actionButton {
+  height: 32px;
+  padding: 0 16px;
+  min-width: 52px;
+  cursor: pointer;
+  outline: 0;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  background: linear-gradient(129.12deg, #446dff 0%, rgba(99, 125, 255, 0.75) 100%);
+  color: #ffffff;
+  font-size: 16px;
+
+  &:hover {
+    background: linear-gradient(129.12deg, #7a90ff 0%, #7a90ff 100%);
+  }
+  
+  &:active {
+    background: linear-gradient(129.12deg, #4d73ff 0%, rgba(81, 110, 255, 0.75) 100%);
+  }
+
+  &.redBtn {
+    background: linear-gradient(129.12deg, #ff446d 0%, rgba(255, 99, 125, 0.75) 100%);
+      
+    &:hover {
+      background: linear-gradient(129.12deg, #ff7a90 0%, #ff7a90 100%);
+    }
+    
+    &:active {
+      background: linear-gradient(129.12deg, #ff4d7a 0%, rgba(255, 81, 119, 0.75) 100%);
+    }
+  }
+}
+
+.uploadList {
+  margin: 10px 0 20px;
+  padding: 0;
+}
+
+.uploadFile {
+  border: 2px solid #ced2df99;
+  list-style: none;
+  border-radius: 16px;
+  height: 90px;
+  padding: 10px 20px;
+  margin-bottom: 12px;
+}
+
+.fileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.fileContent {
+  p {
+    margin: 0;
+  }
+
+  .fileName {
+    color: #445566;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .fileDesc {
+    color: #778899;
+    font-size: 12px;
+
+    :first-child {
+      display: inline-block;
+      width: 50px;
+    }
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  background: #cdd0db;
+  color: #5a5f74;
+  font-size: 16px;
+}
+
+.iconClose {
+  background: #f1c7cc;
+  color: #e82529;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #eba6ae;
+  }
+}
+
+.file-process {
+  height: 4px;
+  border-radius: 2px;
+  background: #cdd0db99;
+  margin-top: 10px;
+  overflow: hidden;
+
+  .process {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(to right, #4f3ce9, #3890fe);
+  }
+}
+
+
+
+

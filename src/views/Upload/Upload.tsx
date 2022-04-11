@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 import DropBox from './components/DropBox';
+import UploadList from './components/UploadList';
 import { IFile } from './types';
 import style from './Upload.module.scss';
 
@@ -37,11 +38,22 @@ function Upload() {
     });
   };
 
+  const cancelAll = () => {
+    setFileList([]);
+  };
+
+  const startAll = () => {
+    fileList.forEach((file) => {
+      sendFile(file);
+    });
+  };
+
   return (
     <div className={style.container}>
       <div className={style.upload_container}>
         <h3 className={style.container_tit}>上传</h3>
         <DropBox onChooseFiles={chooseFiles} />
+        <UploadList fileList={fileList} onStartAll={startAll} onCancelAll={cancelAll} />
       </div>
     </div>
   );

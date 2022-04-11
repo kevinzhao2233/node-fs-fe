@@ -1,5 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
 const path = require('path');
 
 // https://vitejs.dev/config/
@@ -19,5 +20,5 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/views'),
     },
   },
-  plugins: [react()]
-})
+  plugins: [react()],
+});

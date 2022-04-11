@@ -44,6 +44,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'tsx', 'ts'] }],
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    'react/jsx-one-expression-per-line': [0],
 
     /**
      * import 插件相关的

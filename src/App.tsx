@@ -1,5 +1,3 @@
-import './App.css';
-
 import Router from './layout/routerLayout';
 
 function App() {
