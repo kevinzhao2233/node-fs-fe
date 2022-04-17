@@ -8,6 +8,11 @@ interface IProps {
 }
 
 function DropBox({ onChooseFiles }: IProps) {
+  /**
+   * 填充一个适用于本项目的文件列表
+   * @param files 原始文件列表
+   * @returns 经过包装的文件列表
+   */
   const populateFile = (files: FileList) => {
     const result: IFile[] = [];
     if (files?.length) {
@@ -17,7 +22,9 @@ function DropBox({ onChooseFiles }: IProps) {
           name: file.name,
           size: file.size,
           type: file.type,
-          process: 0,
+          uploadProcess: 0,
+          md5Process: 0,
+          md5: '',
           source: file,
         });
       }
@@ -25,18 +32,33 @@ function DropBox({ onChooseFiles }: IProps) {
     return result;
   };
 
+  /**
+   * 选择文件后触发
+   * @param e Input 的 change 事件
+   */
   const chooseUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files?.length) {
       onChooseFiles(populateFile(files));
     }
   };
+
+  /**
+   * 拖拽经过区域，展示移动的图标
+   * @param e 拖拽事件
+   */
   const fileDragover = (e: React.DragEvent) => {
     e.preventDefault();
     if (e.dataTransfer?.dropEffect) {
       e.dataTransfer.dropEffect = 'move';
     }
   };
+
+  /**
+   * 文件被放置到区域
+   * @param e 拖拽事件
+   * @returns undefined
+   */
   const fileDrop = (e: React.DragEvent) => {
     e.preventDefault();
     if (!e.dataTransfer?.files) return;

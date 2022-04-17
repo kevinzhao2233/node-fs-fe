@@ -112,7 +112,7 @@
   }
 }
 
-.file-process {
+.fileProcess {
   height: 4px;
   border-radius: 2px;
   background: #cdd0db99;
@@ -123,6 +123,7 @@
     height: 100%;
     border-radius: 4px;
     background: linear-gradient(to right, #4f3ce9, #3890fe);
+    transition: width 0.05s;
   }
 }
 

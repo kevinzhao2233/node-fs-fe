@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { IFile } from '../types';
 import style from './UploadList.module.scss';
@@ -11,12 +10,20 @@ interface IProps {
 }
 
 function UploadList({ fileList, onCancelAll, onStartAll }: IProps) {
+  /**
+   * 全部取消上传
+   */
   const cancelAll = () => {
     onCancelAll();
   };
+
+  /**
+   * 全部开始上传
+   */
   const startAll = () => {
     onStartAll();
   };
+
   return (
     <div>
       { !!fileList.length && (
@@ -32,7 +39,7 @@ function UploadList({ fileList, onCancelAll, onStartAll }: IProps) {
               <div className={style.fileContent}>
                 <p className={style.fineName}>{ file.name }</p>
                 <p className={style.fileDesc}>
-                  <span>{ file.process }%</span>
+                  <span>{ Math.floor(file.md5Process * 100) }%</span>
                   {/* <span v-if="file.process < 100">大约还需 -- 秒</span> */}
                 </p>
               </div>
@@ -41,7 +48,7 @@ function UploadList({ fileList, onCancelAll, onStartAll }: IProps) {
               </div>
             </div>
             <div className={style.fileProcess}>
-              <div className={style.process} style={{ width: `${file.process}%` }} />
+              <div className={style.process} style={{ width: `${Math.floor(file.md5Process * 100)}%` }} />
             </div>
           </li>
         ))}

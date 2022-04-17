@@ -2,6 +2,8 @@ export interface IFile {
   name: string;
   size: number;
   type: string;
-  process: number;
+  uploadProcess: number,
+  md5Process: number,
+  md5: string,
   source: File
 }
