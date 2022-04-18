@@ -19,8 +19,9 @@ const workerCode = () => {
     const loadNext = () => {
       const start = currentChunk * chunkSize;
       const end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+      const chunk = blobSlice.call(file, start, end);
 
-      fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
+      fileReader.readAsArrayBuffer(chunk);
     };
 
     fileReader.onload = (e) => {

@@ -40,6 +40,7 @@ module.exports = {
     // TS 项目中关闭此配置，但是打开 @typescript-eslint/no-unused-vars
     'no-unused-vars': 'off',
     'no-console': 'off',
+    'max-len': ['error', 140],
 
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'tsx', 'ts'] }],
     'react/react-in-jsx-scope': 'off',

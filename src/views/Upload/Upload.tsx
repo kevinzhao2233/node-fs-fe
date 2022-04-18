@@ -1,8 +1,9 @@
 import { usePrevious } from 'ahooks';
-import axios from 'axios';
 import React, {
   useEffect, useRef, useState,
 } from 'react';
+
+import { mergeChunks, uploadChunkFile, uploadFule } from '@/api';
 
 import workerScript from '../../../public/md5Worker';
 import DropBox from './components/DropBox';
@@ -38,7 +39,7 @@ function Upload() {
     };
   }, []);
 
-  const receiveComputedResult = ({ type, payload }: ReceiveComputedParams) => {
+  const handleMd5Process = ({ type, payload }: ReceiveComputedParams) => {
     const copyFileList = [...fileList];
     const idx = copyFileList.findIndex((file) => file.name === payload.file.name);
     if (idx < 0) return;
@@ -59,7 +60,7 @@ function Upload() {
         return;
       }
       worker.current.onmessage = (e) => {
-        receiveComputedResult(e.data);
+        handleMd5Process(e.data);
       };
       fileList.forEach((file) => {
         if (!file.md5Process) {
@@ -73,28 +74,82 @@ function Upload() {
     setFileList(files);
   };
 
-  const sendFile = (file: IFile) => {
+  // 发送小文件，不需要分片
+  const sendSmallFile = (file: IFile) => {
     const formData = new FormData();
     formData.append('files', file.source);
+    formData.append('md5', file.md5);
     console.log({ formData });
-    axios.post('http://localhost:10001/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      onUploadProgress: (pv: any) => {
-        if (pv.lengthComputable) {
-          const compulate = parseFloat(((pv.loaded / pv.total) * 100).toFixed(1));
-          console.log({ compulate });
+    const onUploadProgress = (pv: any) => {
+      if (pv.lengthComputable) {
+        const compulate = parseFloat(((pv.loaded / pv.total) * 100).toFixed(1));
+        console.log({ compulate });
 
-          const newFileList = [...fileList];
-          const index = newFileList.findIndex((item) => item.name === file.name);
-          newFileList[index].uploadProcess = compulate;
-          setFileList(newFileList);
-        }
-      },
-    }).then((res: any) => {
+        const newFileList = [...fileList];
+        const index = newFileList.findIndex((item) => item.name === file.name);
+        newFileList[index].uploadProcess = compulate;
+        setFileList(newFileList);
+      }
+    };
+    uploadFule('upload', formData, onUploadProgress).then((res: any) => {
       console.log({ res });
     });
+  };
+
+  const computeChunk = (file: IFile, initChunkSize = 5) => {
+    const blobSlice = File.prototype.slice;
+    const chunkSize = initChunkSize * 1024 * 1024;
+    const chunksCount = Math.ceil(file.size / chunkSize);
+    interface ChunkList {
+      chunk: Blob;
+      size: number;
+      name: string;
+    }
+    const fileChunkList:ChunkList[] = [];
+    for (let currentChunk = 0; currentChunk < chunksCount; currentChunk += 1) {
+      const start = currentChunk * chunkSize;
+      const end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+      const chunk = blobSlice.call(file.source, start, end);
+      fileChunkList.push({ chunk, size: chunk.size, name: file.name });
+    }
+    return fileChunkList;
+  };
+
+  // https://mp.weixin.qq.com/s/OSJzh1qK4ziY8C3zrySd_A
+  const sendChunkFile = (file: IFile) => {
+    const DefualtChunkSize = 5;
+    const fileChunkList = computeChunk(file, DefualtChunkSize);
+
+    const onUploadProgress = (pv: any) => {
+      const compulate = parseFloat(((pv.loaded / pv.total) * 100).toFixed(1));
+      console.log({ compulate });
+
+      const newFileList = [...fileList];
+      const index = newFileList.findIndex((item) => item.name === file.name);
+      newFileList[index].uploadProcess = compulate;
+      setFileList(newFileList);
+    };
+
+    const requests = fileChunkList.map((currentChunk, index) => {
+      const formData = new FormData();
+      formData.append(`${currentChunk.name}-${file.md5}-${index}`, currentChunk.chunk);
+      formData.append('fineName', currentChunk.name);
+      formData.append('md5', `${file.md5}-${index}`);
+      formData.append('fileMd5', file.md5);
+      return uploadChunkFile('/upload', formData, onUploadProgress);
+    });
+
+    Promise.all(requests).then(() => {
+      mergeChunks('/mergeChunks', { size: DefualtChunkSize, fileName: file.name });
+    });
+  };
+
+  const sendFile = (file: IFile) => {
+    if (file.size < 5 * 1024 * 1024) {
+      sendSmallFile(file);
+    } else {
+      sendChunkFile(file);
+    }
   };
 
   const cancelAll = () => {
