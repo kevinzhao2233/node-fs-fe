@@ -132,9 +132,10 @@ function Upload() {
 
     const requests = fileChunkList.map((currentChunk, index) => {
       const formData = new FormData();
-      formData.append(`${currentChunk.name}-${file.md5}-${index}`, currentChunk.chunk);
+      formData.append('file', currentChunk.chunk);
       formData.append('fileName', currentChunk.name);
-      formData.append('md5', `${file.md5}-${index}`);
+      formData.append('chunkIndex', `${index}`);
+      formData.append('chunkTotal', `${fileChunkList.length}`);
       formData.append('fileMd5', file.md5);
       return uploadChunkFile(formData, onUploadProgress);
     });
