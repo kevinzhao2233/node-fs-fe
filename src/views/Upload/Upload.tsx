@@ -3,7 +3,7 @@ import React, {
   useEffect, useRef, useState,
 } from 'react';
 
-import { mergeChunks, uploadChunkFile, uploadFule } from '@/api';
+import { mergeChunks, uploadChunkFile, uploadFile } from '@/api';
 
 import workerScript from '../../../public/md5Worker';
 import DropBox from './components/DropBox';
@@ -91,7 +91,7 @@ function Upload() {
         setFileList(newFileList);
       }
     };
-    uploadFule('upload', formData, onUploadProgress).then((res: any) => {
+    uploadFile(formData, onUploadProgress).then((res: any) => {
       console.log({ res });
     });
   };
@@ -133,14 +133,14 @@ function Upload() {
     const requests = fileChunkList.map((currentChunk, index) => {
       const formData = new FormData();
       formData.append(`${currentChunk.name}-${file.md5}-${index}`, currentChunk.chunk);
-      formData.append('fineName', currentChunk.name);
+      formData.append('fileName', currentChunk.name);
       formData.append('md5', `${file.md5}-${index}`);
       formData.append('fileMd5', file.md5);
-      return uploadChunkFile('/upload', formData, onUploadProgress);
+      return uploadChunkFile(formData, onUploadProgress);
     });
 
     Promise.all(requests).then(() => {
-      mergeChunks('/mergeChunks', { size: DefualtChunkSize, fileName: file.name });
+      mergeChunks({ size: DefualtChunkSize, fileName: file.name });
     });
   };
 

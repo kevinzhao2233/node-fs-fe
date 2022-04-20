@@ -37,7 +37,7 @@ function UploadList({ fileList, onCancelAll, onStartAll }: IProps) {
           <li key={file.name} className={style.uploadFile}>
             <div className={style.fileContainer}>
               <div className={style.fileContent}>
-                <p className={style.fineName}>{ file.name }</p>
+                <p className={style.fileName}>{ file.name }</p>
                 <p className={style.fileDesc}>
                   <span>{ Math.floor(file.md5Process * 100) }%</span>
                   {/* <span v-if="file.process < 100">大约还需 -- 秒</span> */}
