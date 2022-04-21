@@ -15,9 +15,9 @@ export const uploadChunkFile = (formData: FormData, onUploadProgress = (pv: any)
 });
 
 // 合并 chunk，在全部 chunk 上传完成后调用
-export const mergeChunks = (data: {size: number, fileName: string}) => axios({
+export const mergeChunks = (data: {fileName: string, md5: string, chunkTotal: number}) => axios({
   method: 'POST',
-  url: '/mergeChunks',
+  url: '/merge-chunks',
   baseURL,
   headers: {
     'Content-Type': 'application/json',

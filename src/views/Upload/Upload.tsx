@@ -132,16 +132,16 @@ function Upload() {
 
     const requests = fileChunkList.map((currentChunk, index) => {
       const formData = new FormData();
-      formData.append('file', currentChunk.chunk);
       formData.append('fileName', currentChunk.name);
       formData.append('chunkIndex', `${index}`);
       formData.append('chunkTotal', `${fileChunkList.length}`);
       formData.append('fileMd5', file.md5);
+      formData.append('file', currentChunk.chunk);
       return uploadChunkFile(formData, onUploadProgress);
     });
 
     Promise.all(requests).then(() => {
-      mergeChunks({ size: DefualtChunkSize, fileName: file.name });
+      mergeChunks({ fileName: file.name, md5: file.md5, chunkTotal: fileChunkList.length });
     });
   };
 
