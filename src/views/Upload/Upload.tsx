@@ -56,7 +56,7 @@ function Upload() {
     if (!prevFileList) return;
     if (fileList.length > prevFileList.length) {
       if (!worker.current) {
-        // 这里应该报错
+        // TODO 这里应该报错
         return;
       }
       worker.current.onmessage = (e) => {

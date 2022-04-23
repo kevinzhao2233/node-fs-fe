@@ -1,18 +1,26 @@
 /// <reference path="md5Worker.d.ts" />
-/* global importScripts SparkMD5 */
+/* global importScripts hashwasm */
+
+/**
+ * 算是被废弃了，用 hash-wash 代替了，这个逼是真的快
+ */
 
 // worker 相关的代码
 const workerCode = () => {
-  importScripts('https://cdn.bootcdn.net/ajax/libs/spark-md5/3.0.2/spark-md5.min.js');
+  importScripts('https://cdn.jsdelivr.net/npm/hash-wasm@4/dist/md5.umd.min.js');
 
-  const computedMd5 = ({
-    file, chunkSize: initChunkSize = 2, onProcess, onEnd,
+  const computedMd5 = async ({
+    file, chunkSize: initChunkSize = 64, onProcess, onEnd,
   }) => {
+    const startTime = Date.now();
     const blobSlice = File.prototype.slice;
     const chunkSize = initChunkSize * 1024 * 1024;
     const chunks = Math.ceil(file.size / chunkSize);
-    const spark = new SparkMD5.ArrayBuffer();
+    // const spark = new SparkMD5.ArrayBuffer();
     const fileReader = new FileReader();
+    const hasher = await hashwasm.createMD5();
+
+    hasher.init();
 
     let currentChunk = 0;
 
@@ -25,19 +33,22 @@ const workerCode = () => {
     };
 
     fileReader.onload = (e) => {
-      console.log('read chunk nr', currentChunk + 1, 'of', chunks);
-      if (e.target?.result && ArrayBuffer.isView(e.target?.result)) {
-        spark.append(e.target.result);
-      }
-      currentChunk += 1;
+      console.log(`${currentChunk + 1} / ${chunks}`);
+      const view = new Uint8Array(e.target.result);
+      hasher.update(view);
 
-      onProcess(currentChunk, chunks, file);
+      currentChunk += 1;
 
       if (currentChunk < chunks) {
         loadNext();
       } else {
-        onEnd(null, spark.end(), file);
-        console.info('computed hash', spark.end());
+        onProcess(currentChunk, chunks, file);
+        const md5 = hasher.digest();
+        const endTime = Date.now();
+        console.info('计算完成 md5: ', md5);
+        console.log(`用时：${endTime - startTime}ms`);
+        console.log(`速度：${file.size / 1024 / 1024 / ((endTime - startTime) / 1000)}M/s`);
+        onEnd(null, md5, file);
       }
     };
 
