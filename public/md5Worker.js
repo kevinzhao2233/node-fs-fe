@@ -1,10 +1,6 @@
 /// <reference path="md5Worker.d.ts" />
 /* global importScripts hashwasm */
 
-/**
- * 算是被废弃了，用 hash-wash 代替了，这个逼是真的快
- */
-
 // worker 相关的代码
 const workerCode = () => {
   importScripts('https://cdn.jsdelivr.net/npm/hash-wasm@4/dist/md5.umd.min.js');
@@ -16,7 +12,6 @@ const workerCode = () => {
     const blobSlice = File.prototype.slice;
     const chunkSize = initChunkSize * 1024 * 1024;
     const chunks = Math.ceil(file.size / chunkSize);
-    // const spark = new SparkMD5.ArrayBuffer();
     const fileReader = new FileReader();
     const hasher = await hashwasm.createMD5();
 
@@ -33,7 +28,6 @@ const workerCode = () => {
     };
 
     fileReader.onload = (e) => {
-      console.log(`${currentChunk + 1} / ${chunks}`);
       const view = new Uint8Array(e.target.result);
       hasher.update(view);
 
@@ -41,6 +35,7 @@ const workerCode = () => {
 
       if (currentChunk < chunks) {
         loadNext();
+        onProcess(currentChunk, chunks, file);
       } else {
         onProcess(currentChunk, chunks, file);
         const md5 = hasher.digest();

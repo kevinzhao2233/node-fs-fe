@@ -71,6 +71,7 @@ function Upload() {
   }, [fileList]);
 
   const chooseFiles = (files: IFile[]) => {
+    console.log('chooseFiles', files);
     setFileList(files);
   };
 
