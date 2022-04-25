@@ -78,8 +78,10 @@ function Upload() {
   // 发送小文件，不需要分片
   const sendSmallFile = (file: IFile) => {
     const formData = new FormData();
-    formData.append('files', file.source);
-    formData.append('md5', file.md5);
+    formData.append('file', file.source);
+    formData.append('fileMd5', file.md5);
+    formData.append('fileName', file.name);
+    formData.append('fileSize', `${file.size}`);
     console.log({ formData });
     const onUploadProgress = (pv: any) => {
       if (pv.lengthComputable) {
