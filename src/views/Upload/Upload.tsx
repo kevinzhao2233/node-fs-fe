@@ -3,7 +3,9 @@ import React, {
   useEffect, useRef, useState,
 } from 'react';
 
-import { mergeChunks, uploadChunkFile, uploadFile } from '@/api';
+import {
+  isFileExist, mergeChunks, uploadChunkFile, uploadFile,
+} from '@/api';
 
 import workerScript from '../../../public/md5Worker';
 import DropBox from './components/DropBox';
@@ -117,36 +119,6 @@ function Upload() {
     return fileChunkList;
   };
 
-  // https://mp.weixin.qq.com/s/OSJzh1qK4ziY8C3zrySd_A
-  // const sendChunkFile = (file: IFile) => {
-  //   const DefualtChunkSize = 5;
-  //   const fileChunkList = computeChunk(file, DefualtChunkSize);
-
-  //   const onUploadProgress = (pv: any) => {
-  //     const compulate = parseFloat(((pv.loaded / pv.total) * 100).toFixed(1));
-  //     console.log({ compulate });
-
-  //     const newFileList = [...fileList];
-  //     const index = newFileList.findIndex((item) => item.name === file.name);
-  //     newFileList[index].uploadProcess = compulate;
-  //     setFileList(newFileList);
-  //   };
-
-  //   const requests = fileChunkList.map((currentChunk, index) => {
-  //     const formData = new FormData();
-  //     formData.append('fileName', currentChunk.name);
-  //     formData.append('chunkIndex', `${index}`);
-  //     formData.append('chunkTotal', `${fileChunkList.length}`);
-  //     formData.append('fileMd5', file.md5);
-  //     formData.append('file', currentChunk.chunk);
-  //     return uploadChunkFile(formData, onUploadProgress);
-  //   });
-
-  //   Promise.all(requests).then(() => {
-  //     mergeChunks({ fileName: file.name, md5: file.md5, chunkTotal: fileChunkList.length });
-  //   });
-  // };
-
   const sendChunkFile = (file: IFile): Promise<{chunkTotal: number}> => new Promise((resolve) => {
     const DefualtChunkSize = 5;
     const fileChunkList = computeChunk(file, DefualtChunkSize);
@@ -196,13 +168,19 @@ function Upload() {
   });
 
   const sendFile = (file: IFile) => {
-    if (file.size < 5 * 1024 * 1024) {
-      sendSmallFile(file);
-    } else {
-      sendChunkFile(file).then(({ chunkTotal }) => {
-        mergeChunks({ fileName: file.name, md5: file.md5, chunkTotal });
-      });
-    }
+    isFileExist({ md5: file.md5 }).then((res) => {
+      if (res.data.isExist) {
+        console.log('文件已经存在\n', res.data);
+        return;
+      }
+      if (file.size < 5 * 1024 * 1024) {
+        sendSmallFile(file);
+      } else {
+        sendChunkFile(file).then(({ chunkTotal }) => {
+          mergeChunks({ fileName: file.name, md5: file.md5, chunkTotal });
+        });
+      }
+    });
   };
 
   const cancelAll = () => {

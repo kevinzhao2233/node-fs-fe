@@ -1,6 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosPromise } from 'axios';
 
 const baseURL = 'http://localhost:10001';
+
+export const isFileExist = (data: {md5?: string, id?: string}): AxiosPromise<any> => axios({
+  url: '/is-file-exist',
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  params: data,
+});
 
 // 上传单个 chunk 文件
 export const uploadChunkFile = (formData: FormData) => axios({
