@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import WindiCSS from 'vite-plugin-windicss';
 
 const path = require('path');
 
@@ -20,6 +21,6 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/views'),
     },
   },
-  plugins: [react()],
+  plugins: [react(), WindiCSS()],
   publicDir: '/public',
 });
