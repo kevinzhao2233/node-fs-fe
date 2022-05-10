@@ -1,8 +1,8 @@
-import Router from './layout/routerLayout';
+import React from 'react';
 
 function App() {
   return (
-    <Router />
+    <div>App</div>
   );
 }
 
