@@ -25,6 +25,6 @@
       "*": ["typings/*"]
     },
   },
-  "include": ["src", "typings/vite-env.d.ts", "public/md5Worker.js"],
+  "include": ["src", "typings/*.d.ts", "public/md5Worker.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

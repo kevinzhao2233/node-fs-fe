@@ -1,8 +1,6 @@
 import './styles/normalize.css';
 import 'remixicon/fonts/remixicon.css';
-import 'virtual:windi.css';
 
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from './App';
