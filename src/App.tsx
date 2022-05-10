@@ -1,6 +1,8 @@
+import Router from '@/routes/Router';
+
 function App() {
   return (
-    <div className="p-20px">App</div>
+    <Router />
   );
 }
 
