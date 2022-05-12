@@ -22,5 +22,8 @@ export default defineConfig({
     },
   },
   plugins: [react(), WindiCSS()],
+  build: {
+    sourcemap: true,
+  },
   publicDir: '/public',
 });
