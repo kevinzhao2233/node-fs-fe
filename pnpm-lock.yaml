@@ -378,7 +378,7 @@ packages:
     version: 7.17.9
     engines: {node: '>=6.9.0'}
     dependencies:
-      core-js-pure: registry.npmmirror.com/core-js-pure/3.22.4
+      core-js-pure: registry.npmmirror.com/core-js-pure/3.22.5
       regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.9
     dev: true
 
@@ -402,11 +402,10 @@ packages:
     dev: true
 
   registry.npmmirror.com/@babel/traverse/7.17.10:
-    resolution: {integrity: sha512-PQO8sDIJ8SIwipTPiR71kJQCKQYB5NGImbOviK8K+kg5xkNSYXLBupuX9QhatFowrsvo9Hj8WgArg3W7ijNAQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/traverse/-/traverse-7.17.9.tgz}
+    resolution: {integrity: sha512-VmbrTHQteIdUUQNTb+zE12SHS/xQVIShmBPhlNP12hD5poF2pbITW1Z4172d03HegaQWhLffdkRJYtAzp0AGcw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/traverse/-/traverse-7.17.10.tgz}
     name: '@babel/traverse'
     version: 7.17.10
     engines: {node: '>=6.9.0'}
-    deprecated: '[WARNING] Use 7.17.9 instead of 7.17.10, reason: https://github.com/babel/babel/issues/14525'
     dependencies:
       '@babel/code-frame': registry.npmmirror.com/@babel/code-frame/7.16.7
       '@babel/generator': registry.npmmirror.com/@babel/generator/7.17.10
@@ -1011,11 +1010,11 @@ packages:
     version: 0.4.0
     dev: false
 
-  registry.npmmirror.com/axe-core/4.4.1:
-    resolution: {integrity: sha512-gd1kmb21kwNuWr6BQz8fv6GNECPBnUasepcoLbekws23NVBLODdsClRZ+bQ8+9Uomf3Sm3+Vwn0oYG9NvwnJCw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axe-core/-/axe-core-4.4.1.tgz}
+  registry.npmmirror.com/axe-core/4.4.2:
+    resolution: {integrity: sha512-LVAaGp/wkkgYJcjmHsoKx4juT1aQvJyPcW09MLCjVTh3V2cc6PnyempiLMNH5iMdfIX/zdbjUx2KDjMLCTdPeA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axe-core/-/axe-core-4.4.2.tgz}
     name: axe-core
-    version: 4.4.1
-    engines: {node: '>=4'}
+    version: 4.4.2
+    engines: {node: '>=12'}
     dev: true
 
   registry.npmmirror.com/axios/0.27.2:
@@ -1243,10 +1242,10 @@ packages:
       safe-buffer: registry.npmmirror.com/safe-buffer/5.1.2
     dev: true
 
-  registry.npmmirror.com/core-js-pure/3.22.4:
-    resolution: {integrity: sha512-4iF+QZkpzIz0prAFuepmxwJ2h5t4agvE8WPYqs2mjLJMNNwJOnpch76w2Q7bUfCPEv/V7wpvOfog0w273M+ZSw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.22.4.tgz}
+  registry.npmmirror.com/core-js-pure/3.22.5:
+    resolution: {integrity: sha512-8xo9R00iYD7TcV7OrC98GwxiUEAabVWO3dix+uyWjnYrx9fyASLlIX+f/3p5dW5qByaP2bcZ8X/T47s55et/tA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js-pure/-/core-js-pure-3.22.5.tgz}
     name: core-js-pure
-    version: 3.22.4
+    version: 3.22.5
     requiresBuild: true
     dev: true
 
@@ -1889,7 +1888,7 @@ packages:
       aria-query: registry.npmmirror.com/aria-query/4.2.2
       array-includes: registry.npmmirror.com/array-includes/3.1.5
       ast-types-flow: registry.npmmirror.com/ast-types-flow/0.0.7
-      axe-core: registry.npmmirror.com/axe-core/4.4.1
+      axe-core: registry.npmmirror.com/axe-core/4.4.2
       axobject-query: registry.npmmirror.com/axobject-query/2.2.0
       damerau-levenshtein: registry.npmmirror.com/damerau-levenshtein/1.0.8
       emoji-regex: registry.npmmirror.com/emoji-regex/9.2.2
