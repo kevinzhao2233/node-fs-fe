@@ -1,9 +1,13 @@
 import React from 'react';
 
+import UploadComp from '@/components/UploadComp';
+
 function Home() {
   return (
-    <div className="p-1">
-      <div>上传文件</div>
+    <div className="grid gap-4 grid-cols-[300px_1fr] p-1">
+      <div>
+        <UploadComp />
+      </div>
       <div>文件列表</div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Router from '@/routes/Router';
 
-import AppHeader from './components/AppHeader/AppHeader';
+import AppHeader from './components/AppHeader';
 
 function App() {
   return (
