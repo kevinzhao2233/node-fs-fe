@@ -1,10 +1,10 @@
 import React from 'react';
 
-import UploadComp from '@/components/UploadComp';
+import UploadComp from '@/components/FileAction';
 
 function Home() {
   return (
-    <div className="grid gap-4 grid-cols-[300px_1fr] p-1">
+    <div className="grid gap-4 grid-cols-[400px_1fr] p-1">
       <div>
         <UploadComp />
       </div>
