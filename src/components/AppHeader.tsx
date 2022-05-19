@@ -1,3 +1,4 @@
+import { Moon, Sun } from '@icon-park/react';
 import { useLocalStorageState } from 'ahooks';
 import React, { useEffect } from 'react';
 
@@ -23,8 +24,8 @@ function AppHeader() {
         className="grid place-items-center gap-4 w-9 cursor-pointer border border-gray-300 dark:border-gray-700 rounded-xl
         shadow-lg shadow-blue-gray-300 dark:shadow-blue-gray-700"
       >
-        {prefersColorScheme === 'light' && <i className="ri-sun-line" />}
-        {prefersColorScheme === 'dark' && <i className="ri-moon-clear-line" />}
+        {prefersColorScheme === 'light' && <Sun theme="outline" size="20" />}
+        {prefersColorScheme === 'dark' && <Moon theme="outline" size="20" />}
       </div>
     </div>
   );

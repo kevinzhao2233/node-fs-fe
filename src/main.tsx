@@ -1,5 +1,5 @@
+import '@icon-park/react/styles/index.css';
 import './styles/normalize.css';
-import 'remixicon/fonts/remixicon.css';
 import 'virtual:windi.css';
 
 import React from 'react';
