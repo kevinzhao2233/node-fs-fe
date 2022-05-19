@@ -13,7 +13,10 @@ const IconConfig = {
 function App() {
   return (
     <IconProvider value={IconConfig}>
-      <div className="relative w-100vw h-100vh dark:bg-[#1C2128] dark:text-light-200">
+      <div className="relative w-100vw h-100vh
+      bg-gradient-to-t from-[#FAD0C4] to-[#FFD1FF]
+      dark:bg-[#1C2128] dark:text-light-200"
+      >
         <AppHeader />
         <Router />
       </div>
