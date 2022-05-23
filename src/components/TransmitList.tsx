@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import React, { useState } from 'react';
 
-import ListItem, { FileItem } from './ListItem';
+import ListItem, { FileItem } from './TransmitItem';
 
 function TransmitList() {
   const [activeTab, setActiveTab] = useState('upload');
