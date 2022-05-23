@@ -8,7 +8,7 @@ function UploadComp() {
   const [action, setAction] = useState<Action>('uploadFile');
   return (
     <div className="flex justify-between items-center w-340px h-80px m-[30px] mt-[30vh] p-4 rounded-3xl
-    bg-[#FFFFFFa7] shadow-xl shadow-gray-300/40 dark:shadow-gray-800/40 select-none"
+    bg-[#FFFFFFa7] shadow-xl shadow-gray-200/40 dark:shadow-gray-800/40 select-none"
     >
       <div className="grid place-items-center gap-4 w-11 h-11 cursor-pointer border border-gray-500 dark:border-gray-700 rounded-xl">
         <Plus size="20" />
