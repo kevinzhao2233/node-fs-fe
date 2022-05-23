@@ -1,13 +1,12 @@
-import {
-  CloseSmall, DownSmall, More, Right, ShareOne,
-} from '@icon-park/react';
 import cn from 'classnames';
 import React, { useState } from 'react';
+
+import ListItem, { FileItem } from './ListItem';
 
 function TransmitList() {
   const [activeTab, setActiveTab] = useState('upload');
 
-  const [list, setList] = useState([{
+  const [list, setList] = useState<FileItem[]>([{
     id: '1',
     name: '这是一个文件.jpg',
     downloadCount: 21,
@@ -48,32 +47,7 @@ function TransmitList() {
         </div>
         <div className="overflow-auto">
           {list.map((file) => (
-            <div key={file.id} className="flex justify-between items-center gap-3 p-4 rounded-xl bg-light-50/50 not-last:mb-2">
-              <div className="max-w-[40%]">
-                <p title={file.name} className="mb-1 font-semibold whitespace-nowrap overflow-hidden overflow-ellipsis">
-                  {file.fileCount > 1 ? `${file.name} 等 ${file.fileCount} 个文件` : file.name}
-                </p>
-                <p className="text-14px text-gray-600/70">
-                  {file.downloadCount} 次下载 | {file.fileCount} 个文件 | {file.totalSize} | {file.expirationTime} 后失效
-                </p>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
-                  <DownSmall theme="outline" size="24" fill="#333" strokeWidth={3} />
-                </div>
-                <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
-                  <CloseSmall theme="outline" size="24" fill="#333" strokeWidth={3} />
-                </div>
-                <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
-                  <ShareOne theme="outline" size="18" fill="#333" strokeWidth={4} />
-                </div>
-                <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
-                  <More theme="outline" size="24" fill="#333" strokeWidth={3} />
-                </div>
-              </div>
-              <div>{file.uploadTime}</div>
-              <Right theme="outline" size="24" fill="#333" strokeWidth={3} />
-            </div>
+            <ListItem file={file} />
           ))}
         </div>
 
