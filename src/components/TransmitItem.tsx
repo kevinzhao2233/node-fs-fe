@@ -19,7 +19,6 @@ function ListItem({ file }: {file: FileItem}) {
 
   return (
     <div
-      key={file.id}
       className="flex justify-between items-center gap-3 p-4 rounded-xl bg-light-50/50 not-last:mb-2"
       onMouseEnter={() => { setIsHover(true); }}
       onMouseLeave={() => { setIsHover(false); }}
@@ -33,16 +32,16 @@ function ListItem({ file }: {file: FileItem}) {
         </p>
       </div>
       <div className={cn('flex gap-4', isHover ? 'visible' : 'invisible')}>
-        <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
+        <div className="btn flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
           <DownSmall theme="outline" size="24" fill="#333" strokeWidth={3} />
         </div>
-        <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
+        <div className="btn flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
           <DeleteFour theme="outline" size="20" fill="#333" strokeWidth={3.5} />
         </div>
-        <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
+        <div className="btn flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
           <CopyLink theme="outline" size="20" fill="#333" strokeWidth={3} />
         </div>
-        <div className="flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
+        <div className="btn flex justify-center items-center w-9 h-9 rounded-xl bg-light-50/70 cursor-pointer">
           <More theme="outline" size="24" fill="#333" strokeWidth={3} />
         </div>
       </div>

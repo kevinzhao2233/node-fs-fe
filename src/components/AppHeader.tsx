@@ -21,7 +21,7 @@ function AppHeader() {
     <div className="flex absolute top-3 right-10 h-9">
       <div
         onClick={toggleMode}
-        className="grid place-items-center gap-4 w-9 cursor-pointer
+        className="btn grid place-items-center gap-4 w-9 cursor-pointer
         border border-gray-300 dark:border-gray-700 rounded-xl
         bg-white dark:bg-blue-gray-700
         shadow-lg shadow-gray-2 00 dark:shadow-blue-gray-700"

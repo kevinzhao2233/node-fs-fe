@@ -31,7 +31,7 @@ function TransmitList() {
           <div
             className={cn(
               'pb-2 border-b-4 border-transparent cursor-pointer transform translate-y-px',
-              activeTab === 'upload' ? 'border-b-light-50' : 'text-gray-500/50',
+              activeTab === 'upload' ? 'border-b-blue-600 text-blue-600' : 'text-gray-500/50',
             )}
             onClick={() => { setActiveTab('upload'); }}
           >我的上传
@@ -39,7 +39,7 @@ function TransmitList() {
           <div
             className={cn(
               'pb-2 border-b-4 border-transparent cursor-pointer transform translate-y-px',
-              activeTab === 'receive' ? 'border-b-light-50' : 'text-gray-500/50',
+              activeTab === 'receive' ? 'border-b-blue-600 text-blue-600' : 'text-gray-500/50',
             )}
             onClick={() => { setActiveTab('receive'); }}
           >我的接收
@@ -47,7 +47,7 @@ function TransmitList() {
         </div>
         <div className="overflow-auto">
           {list.map((file) => (
-            <ListItem file={file} />
+            <ListItem file={file} key={file.id} />
           ))}
         </div>
 
