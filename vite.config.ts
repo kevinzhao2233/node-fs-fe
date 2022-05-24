@@ -16,9 +16,6 @@ export default defineConfig({
     // 别名映射，2.0 版本不再需要以 / 结尾了
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@comps': path.resolve(__dirname, './src/components'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@pages': path.resolve(__dirname, './src/views'),
     },
   },
   plugins: [react(), WindiCSS()],

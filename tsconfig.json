@@ -20,10 +20,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@comps/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@pages/*": ["src/views/*"],
-      "*": ["typings/*"]
+      // "*": ["typings/*"]
     },
   },
   "include": ["src", "typings/*.d.ts", "public/md5Worker.js"],
