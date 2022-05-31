@@ -15,7 +15,7 @@ function UploadList() {
         <div key={file.name} className="flex justify-between items-center py-2 px-3">
           <div>
             <p className="text-14px mb-1">{foldString(file.name, 20)}</p>
-            <p className="text-12px text-gray-500">{file.size}MB</p>
+            <p className="text-12px text-gray-400">{file.size}MB</p>
           </div>
           <div>
             <CloseOne size="18" fill="#333" strokeWidth={3} />
