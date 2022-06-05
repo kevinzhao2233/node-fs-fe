@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import UploadForm from './UploadForm';
 import UploadList from './UploadList';
+import UploadProgress from './UploadProgress';
 
 type Action = 'uploadFile' | 'downloadFile' | 'uploadFolder'
 
@@ -47,9 +48,10 @@ function UploadComp() {
         </div>
       </div>
       <UploadForm />
+      <UploadProgress />
       <div className="flex justify-center pt-6 pb-3">
         <button
-          className="px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
+          className="btn px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
           type="button"
         >开始上传
         </button>
