@@ -2,7 +2,7 @@ import React from 'react';
 
 function UploadProgress() {
   return (
-    <div className="my-2">
+    <div className="my-2 mb-4 px-3">
       <div className="flex justify-between">
         <span>96MB / 478 MB | 20%</span>
         <span>还需 37S</span>
