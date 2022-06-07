@@ -4,6 +4,14 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import type { State } from './FileAction';
 
+function UploadComplate() {
+  return (
+    <div className="flex items-center justify-center h-40 font-semibold text-lg">
+      <span>传输完成</span>
+    </div>
+  );
+}
+
 interface P {
   state: State
 }
@@ -38,7 +46,7 @@ function UploadResult({ state }: P) {
   };
   return (
     <div className="px-3 mb-4">
-      {state === 'upload-complate' && <div>传输完成</div>}
+      {state === 'upload-complate' && <UploadComplate />}
       <div className="flex justify-between items-center gap-2 h-12 font-semibold">
         <div
           className="flex items-center flex-auto p-1 h-full relative
@@ -74,7 +82,15 @@ function UploadResult({ state }: P) {
         }
       </div>
       {state === 'upload-complate'
-      && <div className="btn">再传一次</div>}
+      && (
+        <div className="flex justify-center pt-6 pb-3">
+          <button
+            className="btn px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
+            type="button"
+          >再传一次
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -18,7 +18,7 @@ export type State =
 function UploadComp() {
   const [action, setAction] = useState<Action>('uploadFile');
 
-  const [state, setState] = useState<State>('uploading');
+  const [state, setState] = useState<State>('upload-complate');
 
   const updateState = (_state: State) => {
     setState(_state);
