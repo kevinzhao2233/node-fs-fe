@@ -1,5 +1,6 @@
 import { defineConfig } from 'windicss/helpers';
 import plugin from 'windicss/plugin';
+import scrollSnapPlugin from 'windicss/plugin/scroll-snap';
 
 export default defineConfig({
   darkMode: 'class',
@@ -28,5 +29,6 @@ export default defineConfig({
 
       addComponents(buttons);
     }),
+    scrollSnapPlugin,
   ],
 });
