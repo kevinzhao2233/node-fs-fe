@@ -42,7 +42,7 @@ function UploadResult({ state }: P) {
       <div className="flex justify-between items-center gap-2 h-12 font-semibold">
         <div
           className="flex items-center flex-auto p-1 h-full relative
-            border-gray-500 border-1 rounded-xl overflow-hidden"
+            border-gray-500 border-2 rounded-xl overflow-hidden"
         >
           {res.link}
           <CopyToClipboard text={res.link} onCopy={() => copy('link')}>
@@ -58,7 +58,7 @@ function UploadResult({ state }: P) {
           hasPassword && (
             <div
               className="flex justify-center items-center flex-[80px] flex-grow-0 flex-shrink-0 relative
-                p-1 h-full border-gray-500 border-1 rounded-xl overflow-hidden"
+                p-1 h-full border-gray-500 border-2 rounded-xl overflow-hidden"
             >
               {res.password}
               <CopyToClipboard text={res.password} onCopy={() => copy('password')}>

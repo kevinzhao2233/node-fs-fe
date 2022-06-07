@@ -28,7 +28,7 @@ function UploadComp() {
     <div className="w-340px m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out
     bg-[#FFFFFFa7] shadow-xl shadow-gray-200/40 dark:shadow-gray-800/40 select-none"
     >
-      {state === 'upload-pending' && <UploadList />}
+      {state === 'upload-pending' && <UploadList state={state} />}
       {(state === 'normal' || state === 'upload-pending') && (
         <div className="flex justify-between items-center px-3">
           <div
@@ -81,7 +81,7 @@ function UploadComp() {
       )}
       {state === 'uploading' && <UploadProgress />}
       {(state === 'uploading' || state === 'upload-complate') && <UploadResult state={state} />}
-      {state === 'uploading' && <UploadList />}
+      {state === 'uploading' && <UploadList state={state} />}
     </div>
   );
 }
