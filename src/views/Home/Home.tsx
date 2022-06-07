@@ -1,7 +1,7 @@
 import React from 'react';
 
-import UploadComp from '@/components/FileAction';
-import TransmitList from '@/components/TransmitList';
+import UploadComp from '@/components/FileAction/FileAction';
+import TransmitList from '@/components/TransmitList/TransmitList';
 
 function Home() {
   return (

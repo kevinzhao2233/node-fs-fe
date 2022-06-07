@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Select from './Base/Select';
-import Switch from './Base/Switch';
+import Select from '../Base/Select';
+import Switch from '../Base/Switch';
 
 function UploadForm() {
   const expirationTimes = ['1 天', '3 天', '7 天'];
