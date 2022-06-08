@@ -13,10 +13,11 @@ function UploadComplate() {
 }
 
 interface P {
-  state: State
+  state: State;
+  updateState: (state: State) => void
 }
 
-function UploadResult({ state }: P) {
+function UploadResult({ state, updateState }: P) {
   const [hasPassword, setHasPassword] = useState(true);
   const res = {
     link: 'http://baidu.com/link/1234312313',
@@ -43,6 +44,12 @@ function UploadResult({ state }: P) {
         [target]: false,
       });
     }, 2000);
+  };
+
+  const backToNormal = () => {
+    setTimeout(() => {
+      updateState('normal');
+    }, 200);
   };
   return (
     <div className="px-3 mb-4">
@@ -87,6 +94,7 @@ function UploadResult({ state }: P) {
           <button
             className="btn px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
             type="button"
+            onClick={backToNormal}
           >再传一次
           </button>
         </div>

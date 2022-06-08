@@ -80,7 +80,7 @@ function UploadComp() {
         </>
       )}
       {state === 'uploading' && <UploadProgress />}
-      {(state === 'uploading' || state === 'upload-complate') && <UploadResult state={state} />}
+      {(state === 'uploading' || state === 'upload-complate') && <UploadResult state={state} updateState={updateState} />}
       {state === 'uploading' && <UploadList state={state} />}
     </div>
   );
