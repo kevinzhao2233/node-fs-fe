@@ -1,5 +1,6 @@
 import { Down } from '@icon-park/react';
 import { useClickAway } from 'ahooks';
+import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 
 interface P {
@@ -30,7 +31,12 @@ function Select(props: P) {
         <Down className={`transition-transform ${showOptions ? 'transform rotate-180' : ''}`} size="20" fill="#333" strokeWidth={3} />
       </div>
       {showOptions && (
-        <div className="absolute top-[calc(100% + 8px)] right-0 bg-white py-2 px-0 rounded-8px z-100 shadow-lg shadow-gray-300/50">
+        <div
+          className={classNames(
+            'absolute top-[calc(100% + 8px)] right-0 bg-white py-2 px-0 rounded-8px z-100 shadow-lg shadow-gray-300/50',
+            'animate-dropdown origin-top-left',
+          )}
+        >
           {options && options.map((item) => (
             <div
               key={item}

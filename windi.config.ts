@@ -11,6 +11,15 @@ export default defineConfig({
         sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif',
           'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
       },
+      keyframes: {
+        dropdown: {
+          '0%': { opacity: 0.5, transform: 'scale(0.8)' },
+          '100%': { opacity: 1, transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        dropdown: 'dropdown 0.12s ease-out',
+      },
     },
   },
   plugins: [

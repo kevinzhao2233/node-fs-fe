@@ -18,14 +18,14 @@ export type State =
 function UploadComp() {
   const [action, setAction] = useState<Action>('uploadFile');
 
-  const [state, setState] = useState<State>('upload-complate');
+  const [state, setState] = useState<State>('upload-pending');
 
   const updateState = (_state: State) => {
     setState(_state);
   };
 
   return (
-    <div className="w-340px m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out
+    <div className="w-340px h-auto m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out
     bg-[#FFFFFFa7] shadow-xl shadow-gray-200/40 dark:shadow-gray-800/40 select-none"
     >
       {state === 'upload-pending' && <UploadList state={state} />}
