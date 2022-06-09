@@ -13,12 +13,12 @@ export default defineConfig({
       },
       keyframes: {
         dropdown: {
-          '0%': { opacity: 0.5, transform: 'scale(0.8)' },
+          '0%': { opacity: 0.5, transform: 'scale(0.9, 0.5)' },
           '100%': { opacity: 1, transform: 'scale(1)' },
         },
       },
       animation: {
-        dropdown: 'dropdown 0.12s ease-out',
+        dropdown: 'dropdown 0.2s cubic-bezier(0.23, 1, 0.32, 1) both',
       },
     },
   },

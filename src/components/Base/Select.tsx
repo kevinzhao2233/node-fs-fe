@@ -34,7 +34,7 @@ function Select(props: P) {
         <div
           className={classNames(
             'absolute top-[calc(100% + 8px)] right-0 bg-white py-2 px-0 rounded-8px z-100 shadow-lg shadow-gray-300/50',
-            'animate-dropdown origin-top-left',
+            'animate-dropdown origin-top',
           )}
         >
           {options && options.map((item) => (
