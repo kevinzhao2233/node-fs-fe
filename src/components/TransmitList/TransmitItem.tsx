@@ -19,7 +19,7 @@ function ListItem({ file }: {file: FileItem}) {
 
   return (
     <div
-      className="flex justify-between items-center gap-3 p-4 rounded-xl bg-light-50/50 not-last:mb-2"
+      className="flex justify-between items-center gap-3 p-4 rounded-xl bg-light-50/50 not-last:mb-2 dark:bg-blue-gray-800/50"
       onMouseEnter={() => { setIsHover(true); }}
       onMouseLeave={() => { setIsHover(false); }}
     >

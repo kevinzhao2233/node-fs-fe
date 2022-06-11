@@ -25,8 +25,8 @@ function UploadComp() {
   };
 
   return (
-    <div className="w-340px h-auto m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out
-    bg-[#FFFFFFa7] shadow-xl shadow-gray-200/40 dark:shadow-gray-800/40 select-none"
+    <div className="w-340px h-auto m-7 mr-2 mb-15 p-4 pb-8 rounded-3xl transition-all duration-300 ease-out
+    bg-white/50 shadow-xl shadow-gray-200/40 select-none dark:(shadow-gray-800/40 bg-blue-gray-800/50)"
     >
       {state === 'upload-pending' && <UploadList state={state} />}
       {(state === 'normal' || state === 'upload-pending') && (

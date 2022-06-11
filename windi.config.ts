@@ -1,10 +1,8 @@
 import { defineConfig } from 'windicss/helpers';
-import plugin from 'windicss/plugin';
 import scrollSnapPlugin from 'windicss/plugin/scroll-snap';
 
 export default defineConfig({
   darkMode: 'class',
-  safelist: 'p-3 p-4 p-5',
   theme: {
     extend: {
       fontFamily: {
@@ -23,21 +21,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    plugin(({ addComponents }) => {
-      const buttons = {
-        '.btn': {
-          transition: 'transform 0.15s',
-          '&:hover': {
-            transform: 'scale(1.1);',
-          },
-          '&:active': {
-            transform: 'scale(0.9);',
-          },
-        },
-      };
-
-      addComponents(buttons);
-    }),
     scrollSnapPlugin,
   ],
 });

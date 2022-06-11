@@ -1,6 +1,7 @@
 import '@icon-park/react/styles/index.css';
 import './styles/normalize.css';
 import 'virtual:windi.css';
+import './styles/main.css';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';

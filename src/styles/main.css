@@ -1,0 +1,20 @@
+/* 
+  通用按钮交互过渡效果
+*/
+.btn {
+  @apply
+    transition-all duration-150 transform hover:scale-105 active:scale-90;
+}
+
+/*
+  应用背景
+*/
+.app-bg {
+    background: url('../assets/bg.webp') center / cover no-repeat;
+}
+
+@variants dark {
+  .app-bg {
+    background: url('../assets/bg-dark.webp');
+  }
+}

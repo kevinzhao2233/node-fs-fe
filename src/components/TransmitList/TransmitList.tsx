@@ -26,7 +26,10 @@ function TransmitList() {
 
   return (
     <div className="px-7 py-15 overflow-hidden">
-      <div className="px-3 py-5 h-auto max-h-full rounded-3xl border-light-500 border bg-light-50/20">
+      <div
+        className="px-3 py-5 h-auto max-h-full rounded-3xl border border-white bg-white/20
+          dark:(border-blue-gray-600/50 bg-blue-gray-800/20)"
+      >
         <div className="flex gap-10 mb-8 border-b-1 border-b-light-50 font-semibold select-none">
           <div
             className={cn(
