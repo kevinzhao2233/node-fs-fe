@@ -28,19 +28,19 @@ function Select(props: P) {
     <div ref={containerRef} className="relative">
       <div className="flex items-center cursor-pointer" onClick={() => { setShowOptions(!showOptions); }}>
         <span>{selected}</span>
-        <Down className={`transition-transform ${showOptions ? 'transform rotate-180' : ''}`} size="20" fill="#333" strokeWidth={3} />
+        <Down className={`transition-transform ${showOptions ? 'transform rotate-180' : ''}`} size="20" strokeWidth={3} />
       </div>
       {showOptions && (
         <div
           className={classNames(
             'absolute top-[calc(100% + 8px)] right-0 bg-white py-2 px-0 rounded-8px z-100 shadow-lg shadow-gray-300/50',
-            'animate-dropdown origin-top',
+            'animate-dropdown origin-top dark:(bg-blue-gray-800 shadow-gray-700/50)',
           )}
         >
           {options && options.map((item) => (
             <div
               key={item}
-              className="px-4 whitespace-nowrap cursor-pointer h-8 leading-8 hover:bg-light-600"
+              className="px-4 whitespace-nowrap cursor-pointer h-8 leading-8 hover:bg-light-600 dark:hover:bg-blue-gray-700"
               onClick={() => { selectOption(item); }}
             >{item}
             </div>

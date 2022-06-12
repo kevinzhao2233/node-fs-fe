@@ -8,7 +8,7 @@ interface P {
 
 function Switch(props: P) {
   const { checked, onChange } = props;
-  const [_checked, setChecked] = useState<boolean>(checked || true);
+  const [_checked, setChecked] = useState<boolean>(checked || false);
   const onClick = () => {
     setChecked(!_checked);
     onChange?.(!_checked);
@@ -16,9 +16,9 @@ function Switch(props: P) {
   return (
     <div
       className={cn(
-        'flex items-center relative rounded-xl h-6 w-12 p-1 border-1 border-gray-300',
+        'flex items-center relative rounded-xl h-6 w-12 p-1 border-1 border-gray-400/50 dark:border-gray-700',
         'overflow-hidden transition-all ease-out cursor-pointer',
-        _checked ? 'bg-blue-600' : 'bg-gray-200/40',
+        _checked ? 'bg-indigo-600' : 'bg-blue-gray-200/50 dark:bg-blue-gray-700/50',
       )}
       onClick={onClick}
     >

@@ -26,7 +26,7 @@ function UploadComp() {
 
   return (
     <div className="w-340px h-auto m-7 mr-2 mb-15 p-4 pb-8 rounded-3xl transition-all duration-300 ease-out
-    bg-white/50 shadow-xl shadow-gray-200/40 select-none dark:(shadow-gray-800/40 bg-blue-gray-800/50)"
+    bg-white/50 select-none border border-white dark:(border-1 border-gray-700 bg-blue-gray-800/50)"
     >
       {state === 'upload-pending' && <UploadList state={state} />}
       {(state === 'normal' || state === 'upload-pending') && (
@@ -40,7 +40,7 @@ function UploadComp() {
             <p
               className={cn(
                 'btn cursor-pointer transition-all duration-300 ease-out leading-none mb-1',
-                action !== 'uploadFolder' ? 'text-xl font-semibold' : 'text-gray-900/80',
+                action !== 'uploadFolder' ? 'text-xl font-semibold' : '',
               )}
               onMouseEnter={() => { setAction('uploadFile'); }}
             >{state === 'upload-pending' && '继续'}添加文件
@@ -48,7 +48,7 @@ function UploadComp() {
             <p
               className={cn(
                 'btn cursor-pointer transition-all duration-300 ease-out leading-none',
-                action === 'uploadFolder' ? 'text-xl font-semibold' : 'text-gray-900/80',
+                action === 'uploadFolder' ? 'text-xl font-semibold' : '',
               )}
               onMouseEnter={() => { setAction('uploadFolder'); }}
               onMouseLeave={() => { setAction('uploadFile'); }}
@@ -72,7 +72,8 @@ function UploadComp() {
           <UploadForm />
           <div className="flex justify-center pt-6 pb-3">
             <button
-              className="btn px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
+              className="btn px-12 py-3 bg-indigo-600 text-light-50 rounded-14px font-semibold
+                shadow-xl shadow-indigo-500/50 dark:shadow-indigo-700/50"
               type="button"
             >开始上传
             </button>

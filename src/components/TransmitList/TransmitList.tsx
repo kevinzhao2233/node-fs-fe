@@ -25,16 +25,16 @@ function TransmitList() {
   }]);
 
   return (
-    <div className="px-7 py-15 overflow-hidden">
+    <div className="px-7 pt-20 pb-10 overflow-hidden">
       <div
         className="px-3 py-5 h-auto max-h-full rounded-3xl border border-white bg-white/20
           dark:(border-blue-gray-600/50 bg-blue-gray-800/20)"
       >
-        <div className="flex gap-10 mb-8 border-b-1 border-b-light-50 font-semibold select-none">
+        <div className="flex gap-10 mb-8 border-b-1 border-b-light-50 dark:border-b-gray-700 font-semibold select-none">
           <div
             className={cn(
               'pb-2 border-b-4 border-transparent cursor-pointer transform translate-y-px',
-              activeTab === 'upload' ? 'border-b-blue-600 text-blue-600' : 'text-gray-500/50',
+              activeTab === 'upload' ? 'border-b-indigo-600 text-indigo-600 dark:text-light-100' : 'text-gray-500/50 dark:text-gray-200/50',
             )}
             onClick={() => { setActiveTab('upload'); }}
           >我的上传
@@ -42,7 +42,8 @@ function TransmitList() {
           <div
             className={cn(
               'pb-2 border-b-4 border-transparent cursor-pointer transform translate-y-px',
-              activeTab === 'receive' ? 'border-b-blue-600 text-blue-600' : 'text-gray-500/50',
+              activeTab === 'receive'
+                ? 'border-b-indigo-600 text-indigo-600 dark:text-light-100' : 'text-gray-500/50 dark:text-gray-200/50',
             )}
             onClick={() => { setActiveTab('receive'); }}
           >我的接收

@@ -63,7 +63,7 @@ function UploadResult({ state, updateState }: P) {
           <CopyToClipboard text={res.link} onCopy={() => copy('link')}>
             <div
               className="absolute left-0 top-0 w-full h-full flex justify-center items-center
-              bg-light-100 dark:bg-blue-gray-700 opacity-0 hover:opacity-90 cursor-pointer transition-opacity active:text-blue-600"
+              bg-light-100 dark:bg-blue-gray-700 opacity-0 hover:opacity-90 cursor-pointer transition-opacity active:text-indigo-600"
             >
               {copied.link ? '已复制' : '复制'}
             </div>
@@ -79,7 +79,7 @@ function UploadResult({ state, updateState }: P) {
               <CopyToClipboard text={res.password} onCopy={() => copy('password')}>
                 <div
                   className="absolute left-0 top-0 w-full h-full flex justify-center items-center
-                  bg-light-100 dark:bg-blue-gray-700 opacity-0 hover:opacity-90 cursor-pointer transition-opacity active:text-blue-600"
+                  bg-light-100 dark:bg-blue-gray-700 opacity-0 hover:opacity-90 cursor-pointer transition-opacity active:text-indigo-600"
                 >
                   {copied.password ? '已复制' : '复制'}
                 </div>
@@ -92,7 +92,7 @@ function UploadResult({ state, updateState }: P) {
       && (
         <div className="flex justify-center pt-6 pb-3">
           <button
-            className="btn px-12 py-3 bg-blue-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
+            className="btn px-12 py-3 bg-indigo-600 text-light-50 rounded-14px font-semibold shadow-xl shadow-blue-500/50"
             type="button"
             onClick={backToNormal}
           >再传一次

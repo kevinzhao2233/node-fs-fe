@@ -16,7 +16,7 @@ function App() {
       <div
         className="app-bg relative h-100vh
           font-sans text-gray-800
-          dark:(text-light-200)"
+          dark:(text-light-900)"
       >
         <AppHeader />
         <Router />
