@@ -1,6 +1,6 @@
 import { Down } from '@icon-park/react';
 import { useClickAway } from 'ahooks';
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, { useRef, useState } from 'react';
 
 interface P {
@@ -32,7 +32,7 @@ function Select(props: P) {
       </div>
       {showOptions && (
         <div
-          className={classNames(
+          className={cn(
             'absolute top-[calc(100% + 8px)] right-0 bg-white py-2 px-0 rounded-8px z-100 shadow-lg shadow-gray-300/50',
             'animate-dropdown origin-top dark:(bg-blue-gray-800 shadow-gray-700/50)',
           )}

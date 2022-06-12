@@ -1,25 +1,21 @@
 import { CloseOne } from '@icon-park/react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, { useState } from 'react';
 
 import { foldString } from '@/utils/util';
 
-import type { State } from './FileAction';
+import type { IFile, State } from './FileAction';
 
 interface P {
-  state: State
+  state: State;
+  fileList: IFile[]
 }
 
-function UploadList({ state }: P) {
-  const [fileList, setFileList] = useState([
-    { name: 'hello.jpg', size: 1234 },
-    { name: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈.jpg', size: 1234 },
-    { name: '哈哈哈哈哈.jpg', size: 1234 },
-  ]);
+function UploadList({ state, fileList }: P) {
   return (
-    <div className={classNames(
+    <div className={cn(
       'max-h-40 mb-3 overflow-y-auto',
-      state === 'upload-pending' ? 'border-b-1 border-gray-300 dark:border-gray-700' : '',
+      state === 'uploadPending' ? 'border-b-1 border-gray-300 dark:border-gray-700' : '',
     )}
     >
       {fileList.map((file) => (

@@ -53,7 +53,7 @@ function UploadResult({ state, updateState }: P) {
   };
   return (
     <div className="px-3 mb-4">
-      {state === 'upload-complate' && <UploadComplate />}
+      {state === 'uploadComplate' && <UploadComplate />}
       <div className="flex justify-between items-center gap-2 h-12 font-semibold">
         <div
           className="flex items-center flex-auto p-1 h-full relative
@@ -88,7 +88,7 @@ function UploadResult({ state, updateState }: P) {
           )
         }
       </div>
-      {state === 'upload-complate'
+      {state === 'uploadComplate'
       && (
         <div className="flex justify-center pt-6 pb-3">
           <button

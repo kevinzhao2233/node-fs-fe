@@ -22,6 +22,14 @@ function UploadForm() {
           placeholder="描述信息"
         />
       </div>
+      <div className="flex justify-center pt-6 pb-3">
+        <button
+          className="btn px-12 py-3 bg-indigo-600 text-light-50 rounded-14px font-semibold
+            shadow-xl shadow-indigo-500/50 dark:shadow-indigo-700/50"
+          type="button"
+        >开始上传
+        </button>
+      </div>
     </div>
   );
 }
