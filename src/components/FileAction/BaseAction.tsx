@@ -2,8 +2,6 @@ import { Plus } from '@icon-park/react';
 import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { uploadChunkFile } from '@/api';
-
 import type { State } from './FileAction';
 
 type Action = 'uploadFile' | 'receiveFile' | 'uploadFolder';
