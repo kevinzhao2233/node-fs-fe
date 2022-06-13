@@ -1,6 +1,6 @@
 import { CloseOne } from '@icon-park/react';
 import cn from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { foldString } from '@/utils/util';
 

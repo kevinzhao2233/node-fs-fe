@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 

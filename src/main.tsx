@@ -1,5 +1,5 @@
 import '@icon-park/react/styles/index.css';
-import './styles/normalize.css';
+import './styles/reset.css';
 import 'virtual:windi.css';
 import './styles/main.css';
 

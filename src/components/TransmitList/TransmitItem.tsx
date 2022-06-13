@@ -1,5 +1,5 @@
 import {
-  CloseSmall, CopyLink, DeleteFour, DownSmall, More, Right, ShareOne,
+  CopyLink, DeleteFour, DownSmall, More, Right,
 } from '@icon-park/react';
 import cn from 'classnames';
 import React, { useState } from 'react';
