@@ -2,6 +2,7 @@ import { Plus } from '@icon-park/react';
 import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
+import type { IFile, IFolder } from '../../types';
 import type { State } from './FileAction';
 
 type Action = 'uploadFile' | 'receiveFile' | 'uploadFolder';
@@ -9,10 +10,14 @@ type Action = 'uploadFile' | 'receiveFile' | 'uploadFolder';
 interface P {
   state: State;
   updateState: (state: State) => void;
-  clearPreUpload: () => void
+  clearPreUpload: () => void;
+  onChooseFile: (fileList: IFile[]) => void;
+  onChooseFolder: (folderList: IFolder[]) => void;
 }
 
-function BaseAction({ state, updateState, clearPreUpload }: P) {
+function BaseAction({
+  state, updateState, clearPreUpload, onChooseFile, onChooseFolder,
+}: P) {
   const [action, setAction] = useState<Action>('uploadFile');
 
   const inputFolderRef = useRef<HTMLInputElement>(null);
@@ -24,11 +29,69 @@ function BaseAction({ state, updateState, clearPreUpload }: P) {
     }
   }, [inputFolderRef]);
 
-  const chooseFile = () => {
+  const chooseFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (!files?.length) return;
 
+    const tempFileList: IFile[] = [];
+
+    for (let idx = 0; idx < files.length; idx += 1) {
+      const file = files.item(idx) as File;
+      tempFileList.push({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        uploadProcess: 0,
+        md5Process: 0,
+        md5: '',
+        source: file,
+        state: 'chosen',
+        isFolder: false,
+      });
+    }
+
+    onChooseFile(tempFileList);
   };
 
-  const chooseFolder = () => {
+  const chooseFolder = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (!files?.length) return;
+
+    const tempFileList: IFile[] = [];
+
+    const tempFolderList: IFolder[] = [];
+
+    let totalSize = 0;
+
+    const folderName = files[0].webkitRelativePath.split('/')[0];
+
+    for (let idx = 0; idx < files.length; idx += 1) {
+      const file = files.item(idx) as File;
+      totalSize = file.size + totalSize;
+      tempFileList.push({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        uploadProcess: 0,
+        md5Process: 0,
+        md5: '',
+        state: 'chosen',
+        relativePath: file.webkitRelativePath,
+        source: file,
+        isFolder: true,
+      });
+    }
+
+    tempFolderList.push(
+      {
+        name: folderName,
+        isFolder: true,
+        size: totalSize,
+        files: tempFileList,
+      },
+    );
+
+    onChooseFolder(tempFolderList);
   };
 
   return (

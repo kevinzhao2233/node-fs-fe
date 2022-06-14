@@ -1,5 +1,7 @@
 import cn from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { IFile, IFolder } from '@/types';
 
 import BaseAction from './BaseAction';
 import UploadForm from './UploadForm';
@@ -14,11 +16,6 @@ export type State =
   'uploadComplate' |
   'receivePending'
 
-export interface IFile {
-  name: string;
-  size: number;
-}
-
 function FileAction() {
   const [state, setState] = useState<State>('normal');
 
@@ -26,15 +23,15 @@ function FileAction() {
     setState(_state);
   };
 
-  const [fileList, setFileList] = useState<IFile[]>([
-    { name: 'hello.jpg', size: 1234 },
-    { name: '哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈.jpg', size: 1234 },
-    { name: '哈哈哈哈哈.jpg', size: 1234 },
-  ]);
+  const [fileList, setFileList] = useState<IFile[] | IFolder[]>([]);
 
   const clearPreUpload = () => {
     setState('normal');
   };
+
+  useEffect(() => {
+    if (fileList.length) { setState('uploadPending'); }
+  }, [fileList]);
 
   return (
     <div className={cn(
@@ -45,7 +42,15 @@ function FileAction() {
     >
       {state === 'uploadPending' && <UploadList state={state} fileList={fileList} />}
       {(state === 'normal' || state === 'uploadPending')
-       && <BaseAction state={state} updateState={updateState} clearPreUpload={clearPreUpload} />}
+       && (
+         <BaseAction
+           state={state}
+           updateState={updateState}
+           clearPreUpload={clearPreUpload}
+           onChooseFile={(tempFileList) => { setFileList(tempFileList); }}
+           onChooseFolder={(tempFolderList) => { setFileList(tempFolderList); }}
+         />
+       )}
       {state === 'uploadPending' && <UploadForm />}
       {state === 'uploading' && <UploadProgress />}
       {(state === 'uploading' || state === 'uploadComplate') && <UploadResult state={state} updateState={updateState} />}
