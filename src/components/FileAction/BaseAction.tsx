@@ -88,6 +88,7 @@ function BaseAction({
         isFolder: true,
         size: totalSize,
         files: tempFileList,
+        state: 'chosen',
       },
     );
 

@@ -17,5 +17,6 @@ export interface IFolder {
   name: string;
   isFolder: boolean;
   size: number;
+  state: 'chosen' | 'processingMd5' | 'uploading' | 'uploadComplete',
   files: IFile[]
 }

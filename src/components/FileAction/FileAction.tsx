@@ -23,15 +23,24 @@ function FileAction() {
     setState(_state);
   };
 
-  const [fileList, setFileList] = useState<IFile[] | IFolder[]>([]);
-
   const clearPreUpload = () => {
     setState('normal');
   };
 
+  const [fileList, setFileList] = useState<(IFile | IFolder)[]>([]);
+
   useEffect(() => {
     if (fileList.length) { setState('uploadPending'); }
+    if (fileList.length === 0) (setState('normal'));
   }, [fileList]);
+
+  const RemoveFile = (file: IFile | IFolder) => {
+    const index = fileList.findIndex((item) => item.name === file.name);
+    const cpFileList = [...fileList];
+
+    cpFileList.splice(index, 1);
+    setFileList(cpFileList);
+  };
 
   return (
     <div className={cn(
@@ -40,7 +49,7 @@ function FileAction() {
       state === 'normal' ? 'pb-4' : 'pb-8',
     )}
     >
-      {state === 'uploadPending' && <UploadList state={state} fileList={fileList} />}
+      {state === 'uploadPending' && <UploadList state={state} fileList={fileList} onRemoveFile={(file) => RemoveFile(file)} />}
       {(state === 'normal' || state === 'uploadPending')
        && (
          <BaseAction
