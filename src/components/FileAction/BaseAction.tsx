@@ -20,6 +20,8 @@ function BaseAction({
 }: P) {
   const [action, setAction] = useState<Action>('uploadFile');
 
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
   const inputFolderRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ function BaseAction({
     }
 
     onChooseFile(tempFileList);
+    if (inputFileRef.current) inputFileRef.current.value = '';
   };
 
   const chooseFolder = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +96,7 @@ function BaseAction({
     );
 
     onChooseFolder(tempFolderList);
+    if (inputFolderRef.current) inputFolderRef.current.value = '';
   };
 
   return (
@@ -125,7 +129,7 @@ function BaseAction({
         >或添加文件夹
         </label>
       </div>
-      <input type="file" id="inputId" multiple onChange={chooseFile} style={{ display: 'none' }} />
+      <input ref={inputFileRef} type="file" id="inputId" multiple onChange={chooseFile} style={{ display: 'none' }} />
       <input ref={inputFolderRef} type="file" id="inputFolderId" multiple onChange={chooseFolder} style={{ display: 'none' }} />
       {(state === 'normal' || state === 'uploadPending') && (
         <div
