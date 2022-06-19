@@ -134,7 +134,7 @@ function BaseAction({
       {(state === 'normal' || state === 'uploadPending') && (
         <div
           className="btn grid place-items-center w-100px h-40px cursor-pointer hover:font-semibold
-          bg-white rounded-3xl shadow shadow-[0px_6px_24px_rgba(150,150,150,0.25)]
+          bg-white rounded-3xl dark:bg-blue-gray-700/70
             transition-all duration-200"
           onMouseEnter={() => { if (state === 'normal') setAction('receiveFile'); }}
           onClick={() => { if (state === 'normal') { updateState('receivePending'); } else { clearPreUpload(); } }}
