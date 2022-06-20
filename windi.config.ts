@@ -1,3 +1,4 @@
+import pluginScrollbar from '@windicss/plugin-scrollbar';
 import { defineConfig } from 'windicss/helpers';
 import scrollSnapPlugin from 'windicss/plugin/scroll-snap';
 
@@ -22,5 +23,6 @@ export default defineConfig({
   },
   plugins: [
     scrollSnapPlugin,
+    pluginScrollbar,
   ],
 });

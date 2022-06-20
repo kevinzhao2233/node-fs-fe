@@ -17,7 +17,7 @@ interface P {
 function UploadList({ state, fileList, onRemoveFile }: P) {
   return (
     <div className={cn(
-      'max-h-40 mb-3 overflow-y-auto',
+      'max-h-40 mb-3 overflow-y-auto scroll-bar',
       state === 'uploadPending' ? 'border-b-1 border-gray-300 dark:border-gray-700' : '',
     )}
     >

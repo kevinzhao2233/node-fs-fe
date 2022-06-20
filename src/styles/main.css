@@ -13,6 +13,14 @@
     background: url('../assets/bg.webp') center / cover no-repeat;
 }
 
+/*
+  滚动条
+*/
+.scroll-bar {
+  @apply
+    scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-blue-gray-50 dark:scrollbar-thumb-gray-700 dark:scrollbar-track-blue-gray-800;
+}
+
 @variants dark {
   .app-bg {
     background: url('../assets/bg-dark.webp');
