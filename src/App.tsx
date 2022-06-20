@@ -14,7 +14,7 @@ function App() {
   return (
     <IconProvider value={IconConfig}>
       <div
-        className="app-bg relative h-100vh
+        className="app-bg relative h-100vh overflow-auto scroll-bar
           font-sans text-gray-800
           dark:(text-light-900)"
       >
