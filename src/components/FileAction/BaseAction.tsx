@@ -1,5 +1,6 @@
 import { Plus } from '@icon-park/react';
 import cn from 'classnames';
+import { nanoid } from 'nanoid';
 import React, { useEffect, useRef, useState } from 'react';
 
 import type { IFile, IFolder } from '../../types';
@@ -40,6 +41,7 @@ function BaseAction({
     for (let idx = 0; idx < files.length; idx += 1) {
       const file = files.item(idx) as File;
       tempFileList.push({
+        id: nanoid(),
         name: file.name,
         size: file.size,
         type: file.type,
@@ -66,12 +68,15 @@ function BaseAction({
 
     let totalSize = 0;
 
+    const folderId = nanoid();
+
     const folderName = files[0].webkitRelativePath.split('/')[0];
 
     for (let idx = 0; idx < files.length; idx += 1) {
       const file = files.item(idx) as File;
       totalSize = file.size + totalSize;
       tempFileList.push({
+        id: nanoid(),
         name: file.name,
         size: file.size,
         type: file.type,
@@ -81,12 +86,14 @@ function BaseAction({
         state: 'chosen',
         relativePath: file.webkitRelativePath,
         source: file,
-        isFolder: true,
+        isFolder: false,
+        folderId,
       });
     }
 
     tempFolderList.push(
       {
+        id: folderId,
         name: folderName,
         isFolder: true,
         size: totalSize,
