@@ -12,12 +12,13 @@ interface P {
   state: State;
   updateState: (state: State) => void;
   clearPreUpload: () => void;
-  onChooseFile: (fileList: IFile[]) => void;
-  onChooseFolder: (folderList: IFolder[]) => void;
+  fileList:(IFile | IFolder)[];
+  onChooseFile: (fileList: (IFile | IFolder)[]) => void;
+  onChooseFolder: (folderList: (IFile | IFolder)[]) => void;
 }
 
 function BaseAction({
-  state, updateState, clearPreUpload, onChooseFile, onChooseFolder,
+  state, updateState, clearPreUpload, fileList, onChooseFile, onChooseFolder,
 }: P) {
   const [action, setAction] = useState<Action>('uploadFile');
 
@@ -31,6 +32,23 @@ function BaseAction({
       inputFolderRef.current.setAttribute('webkitdirectory', '');
     }
   }, [inputFolderRef]);
+
+  const removeDuplicates = (origin: (IFile | IFolder)[], current: (IFile | IFolder)[]) => {
+    const originMap: any = {};
+    origin.forEach((item) => {
+      originMap[item.name] = 1;
+    });
+    const removedDups: (IFile | IFolder)[] = [];
+    const duplicateNames: string[] = [];
+    current.forEach((item) => {
+      if (originMap[item.name]) {
+        duplicateNames.push(item.name);
+      } else {
+        removedDups.push(item);
+      }
+    });
+    return { removedDups, duplicateNames };
+  };
 
   const chooseFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -54,7 +72,13 @@ function BaseAction({
       });
     }
 
-    onChooseFile(tempFileList);
+    const { removedDups, duplicateNames } = removeDuplicates(fileList, tempFileList);
+
+    if (duplicateNames.length > 0) {
+      alert(`${duplicateNames.join('，')} ${duplicateNames.length < 1 ? '已在上传列表' : `等 ${duplicateNames.length} 个文件已在上传列表`}，已帮你过滤`);
+    }
+
+    onChooseFile([...fileList, ...removedDups]);
     if (inputFileRef.current) inputFileRef.current.value = '';
   };
 
@@ -102,7 +126,13 @@ function BaseAction({
       },
     );
 
-    onChooseFolder(tempFolderList);
+    const { removedDups, duplicateNames } = removeDuplicates(fileList, tempFolderList);
+
+    if (duplicateNames.length > 0) {
+      alert(`${duplicateNames.join('，')} ${duplicateNames.length < 1 ? '目录已在上传列表' : `等 ${duplicateNames.length} 个目录已在上传列表`}，已帮你过滤`);
+    }
+
+    onChooseFolder([...fileList, ...removedDups]);
     if (inputFolderRef.current) inputFolderRef.current.value = '';
   };
 

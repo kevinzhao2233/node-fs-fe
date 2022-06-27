@@ -164,6 +164,7 @@ function FileAction() {
            state={state}
            updateState={updateState}
            clearPreUpload={clearPreUpload}
+           fileList={fileList}
            onChooseFile={(tempFileList) => { setFileList(tempFileList); }}
            onChooseFolder={(tempFolderList) => { setFileList(tempFolderList); }}
          />
