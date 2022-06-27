@@ -153,7 +153,7 @@ function FileAction() {
   return (
     <div className={cn(
       'w-340px h-auto m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out',
-      'bg-white/50 select-none border border-white dark:(border-1 border-gray-700 bg-blue-gray-800/50)',
+      'bg-white/50 select-none border-2 border-white dark:(border-gray-700 bg-blue-gray-800/50)',
       state === 'normal' ? 'pb-4' : 'pb-8',
     )}
     >
