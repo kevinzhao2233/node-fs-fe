@@ -66,35 +66,28 @@ function FileAction() {
   useEffect(() => {
     const myWorker = new Worker(workerScript);
     worker.current = myWorker;
-    myWorker.onmessage = function m(event) {
-      console.log(`Received message ${event.data}`);
-    };
     return () => {
       worker.current?.terminate();
     };
   }, []);
 
-  const maxQueue = 2;
+  const maxQueue = 1;
   const [numInQueue, setNumInQueue] = useState(0);
   const [md5Queue, setMd5Queue] = useState<IFile[]>([]);
   const [md5QueueMap, setMd5QueueMap] = useState<Record<string, IFile | null>>({});
 
   const calcMd5 = () => {
-    // console.log('calc', md5Queue.length, numInQueue);
     if (md5Queue.length > 0 && numInQueue < maxQueue) {
-      // console.log('calc----');
       const tempMd5Queue = [...md5Queue];
       const file = tempMd5Queue.shift() as IFile;
       worker.current?.postMessage({ file });
       setMd5Queue(tempMd5Queue);
       setMd5QueueMap({ ...md5QueueMap, [file.id]: null });
       setNumInQueue((i) => i + 1);
-      // console.log(file.name, '将要被计算', '队列数：', numInQueue);
     }
   };
 
   const addToQueue = (files: IFile[]) => {
-    console.log(files);
     const tempMd5QueueMap = { ...md5QueueMap };
     const tempMd5Queue = [...md5Queue];
     files.forEach((file) => {
@@ -108,7 +101,9 @@ function FileAction() {
   };
 
   useEffect(() => {
-    calcMd5();
+    if (md5Queue.length) {
+      calcMd5();
+    }
   }, [numInQueue, md5Queue]);
 
   const handleMd5Process = ({ type, payload }: ReceiveComputedParams) => {
@@ -127,6 +122,7 @@ function FileAction() {
       if (type === 'end') {
         (copyFileList[folderIdx] as IFolder).files[fileIdx].md5 = payload.md5;
         (copyFileList[folderIdx] as IFolder).files[fileIdx].state = 'prepareForUpload';
+        setNumInQueue((i) => i - 1);
       }
     } else {
       const fileIdx = copyFileList.findIndex((item) => item.id === payload.file.id);
@@ -154,7 +150,6 @@ function FileAction() {
       // idx >=0 说明还存在正在进行 md5 运算的文件夹
       const isProcess = item.files.findIndex((file) => ['processingMd5', 'chosen'].includes(file.state)) >= 0;
       if (isProcess) return;
-      console.log(isProcess, item);
       copyFileList[outerIdx].state = 'prepareForUpload';
       isUpdate = true;
     });
