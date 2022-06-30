@@ -74,6 +74,43 @@ function FileAction() {
     };
   }, []);
 
+  const maxQueue = 2;
+  const [numInQueue, setNumInQueue] = useState(0);
+  const [md5Queue, setMd5Queue] = useState<IFile[]>([]);
+  const [md5QueueMap, setMd5QueueMap] = useState<Record<string, IFile | null>>({});
+
+  const calcMd5 = () => {
+    // console.log('calc', md5Queue.length, numInQueue);
+    if (md5Queue.length > 0 && numInQueue < maxQueue) {
+      // console.log('calc----');
+      const tempMd5Queue = [...md5Queue];
+      const file = tempMd5Queue.shift() as IFile;
+      worker.current?.postMessage({ file });
+      setMd5Queue(tempMd5Queue);
+      setMd5QueueMap({ ...md5QueueMap, [file.id]: null });
+      setNumInQueue((i) => i + 1);
+      // console.log(file.name, '将要被计算', '队列数：', numInQueue);
+    }
+  };
+
+  const addToQueue = (files: IFile[]) => {
+    console.log(files);
+    const tempMd5QueueMap = { ...md5QueueMap };
+    const tempMd5Queue = [...md5Queue];
+    files.forEach((file) => {
+      if (!tempMd5QueueMap[file.id]) {
+        tempMd5QueueMap[file.id] = file;
+        tempMd5Queue.push(file);
+      }
+    });
+    setMd5QueueMap(tempMd5QueueMap);
+    setMd5Queue(tempMd5Queue);
+  };
+
+  useEffect(() => {
+    calcMd5();
+  }, [numInQueue, md5Queue]);
+
   const handleMd5Process = ({ type, payload }: ReceiveComputedParams) => {
     const copyFileList = [...fileList];
 
@@ -101,6 +138,7 @@ function FileAction() {
       if (type === 'end') {
         (copyFileList[fileIdx] as IFile).md5 = payload.md5;
         (copyFileList[fileIdx] as IFile).state = 'prepareForUpload';
+        setNumInQueue((i) => i - 1);
       }
     }
     setFileList(copyFileList);
@@ -137,17 +175,23 @@ function FileAction() {
     worker.current.onmessage = (e) => {
       handleMd5Process(e.data);
     };
+    const needCalcFiles: IFile[] = [];
     fileList.forEach((item) => {
       if (item.state === 'chosen') {
         if (item.isFolder) {
           item.files.forEach((file) => {
-            worker.current?.postMessage({ file });
+            needCalcFiles.push(file);
+            // calcMd5(file);
+            // worker.current?.postMessage({ file });
           });
         } else {
-          worker.current?.postMessage({ file: item });
+          needCalcFiles.push(item);
+          // calcMd5(item);
+          // worker.current?.postMessage({ file: item });
         }
       }
     });
+    addToQueue(needCalcFiles);
   }, [fileListLen]);
 
   return (
