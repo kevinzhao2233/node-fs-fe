@@ -8,7 +8,7 @@ import { IFile, IFolder } from '@/types';
 
 import workerScript from '../../../public/md5Worker';
 import BaseAction from './BaseAction';
-import UploadForm from './UploadForm';
+import UploadForm, { UploadConfig } from './UploadForm';
 import UploadList from './UploadList';
 import UploadProgress from './UploadProgress';
 import UploadResult from './UploadResult';
@@ -174,20 +174,18 @@ function FileAction() {
     fileList.forEach((item) => {
       if (item.state === 'chosen') {
         if (item.isFolder) {
-          item.files.forEach((file) => {
-            needCalcFiles.push(file);
-            // calcMd5(file);
-            // worker.current?.postMessage({ file });
-          });
+          item.files.forEach((file) => needCalcFiles.push(file));
         } else {
           needCalcFiles.push(item);
-          // calcMd5(item);
-          // worker.current?.postMessage({ file: item });
         }
       }
     });
     addToQueue(needCalcFiles);
   }, [fileListLen]);
+
+  const handleUpload = (config: UploadConfig) => {
+    console.log({ config, fileList });
+  };
 
   return (
     <div className={cn(
@@ -208,7 +206,7 @@ function FileAction() {
            onChooseFolder={(tempFolderList) => { setFileList(tempFolderList); }}
          />
        )}
-      {state === 'uploadPending' && <UploadForm />}
+      {state === 'uploadPending' && <UploadForm onUpload={handleUpload} />}
       {state === 'uploading' && <UploadProgress />}
       {(state === 'uploading' || state === 'uploadComplate') && <UploadResult state={state} updateState={updateState} />}
       {state === 'uploading' && <UploadList state={state} fileList={fileList} />}

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface P {
   checked?: boolean;
@@ -8,23 +8,21 @@ interface P {
 
 function Switch(props: P) {
   const { checked, onChange } = props;
-  const [_checked, setChecked] = useState<boolean>(checked || false);
   const onClick = () => {
-    setChecked(!_checked);
-    onChange?.(!_checked);
+    onChange?.(!checked);
   };
   return (
     <div
       className={cn(
         'flex items-center relative rounded-xl h-6 w-12 p-1 border-1 border-gray-400/50 dark:border-gray-700',
         'overflow-hidden transition-all ease-out cursor-pointer',
-        _checked ? 'bg-indigo-600' : 'bg-blue-gray-200/50 dark:bg-blue-gray-700/50',
+        checked ? 'bg-indigo-600' : 'bg-blue-gray-200/50 dark:bg-blue-gray-700/50',
       )}
       onClick={onClick}
     >
       <div className={cn(
         'absolute bg-white rounded-full shadow-md transition-all ease-out',
-        _checked ? 'left-24px w-4 h-4 shadow-white-400' : 'left-1 w-2 h-2 shadow-gray-400',
+        checked ? 'left-24px w-4 h-4 shadow-white-400' : 'left-1 w-2 h-2 shadow-gray-400',
       )}
       />
     </div>
