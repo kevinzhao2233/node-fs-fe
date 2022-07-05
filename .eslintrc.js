@@ -55,12 +55,12 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
 
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/no-unused-vars': ['warn'],
     '@typescript-eslint/explicit-function-return-type': 'off',
-
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
 
     'jsx-a11y/accessible-emoji': 'off',
     'jsx-a11y/anchor-is-valid': [
