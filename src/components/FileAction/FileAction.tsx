@@ -4,6 +4,7 @@ import React, {
   useEffect, useMemo, useRef, useState,
 } from 'react';
 
+import { isFileExist } from '@/api';
 import { IFile, IFolder } from '@/types';
 
 import workerScript from '../../../public/md5Worker';
@@ -185,7 +186,28 @@ function FileAction() {
 
   const handleUpload = (config: UploadConfig) => {
     console.log({ config, fileList });
+    updateState('uploading');
   };
+
+  // 校验文件是否存在，是否可以进一步闪传
+  useEffect(() => {
+    if (state !== 'uploading') return;
+    fileList.forEach((item) => {
+      if (item.state === 'prepareForUpload') {
+        if (item.isFolder) {
+          item.files.forEach((file) => {
+            isFileExist({ md5: file.md5 }).then((res) => {
+              console.log(file.name, res);
+            });
+          });
+        } else {
+          isFileExist({ md5: item.md5 }).then((res) => {
+            console.log(item.name, res);
+          });
+        }
+      }
+    });
+  }, [state, fileList]);
 
   return (
     <div className={cn(
