@@ -32,12 +32,14 @@ function UploadList({ state, fileList, onRemoveFile }: P) {
           </div>
           <div className="flex gap-2">
             {file.state === 'processingMd5' && <LoadingFour className="animate-spin" size="18" strokeWidth={3} />}
-            <CloseOne
-              className="btn cursor-pointer hover:text-indigo-500"
-              size="18"
-              strokeWidth={3}
-              onClick={() => { onRemoveFile?.(file); }}
-            />
+            {state !== 'uploading' ? (
+              <CloseOne
+                className="btn cursor-pointer hover:text-indigo-500"
+                size="18"
+                strokeWidth={3}
+                onClick={() => { onRemoveFile?.(file); }}
+              />
+            ) : null}
           </div>
         </div>
       ))}

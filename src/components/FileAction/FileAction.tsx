@@ -184,7 +184,7 @@ function FileAction() {
     addToQueue(needCalcFiles);
   }, [fileListLen]);
 
-  const handleUpload = (config: UploadConfig) => {
+  const onUpload = (config: UploadConfig) => {
     console.log({ config, fileList });
     updateState('uploading');
   };
@@ -211,9 +211,9 @@ function FileAction() {
 
   return (
     <div className={cn(
-      'w-340px h-auto m-7 mr-2 mb-15 p-4 rounded-3xl transition-all duration-300 ease-out',
+      'w-340px h-auto m-7 mr-2 p-4 rounded-3xl transition-all duration-300 ease-out',
       'bg-white/50 select-none border-2 border-white dark:(border-gray-700 bg-blue-gray-800/50)',
-      state === 'normal' ? 'pb-4' : 'pb-8',
+      state === 'normal' || state === 'uploading' ? 'pb-4' : 'pb-8',
     )}
     >
       {state === 'uploadPending' && <UploadList state={state} fileList={fileList} onRemoveFile={(file) => RemoveFile(file)} />}
@@ -228,7 +228,7 @@ function FileAction() {
            onChooseFolder={(tempFolderList) => { setFileList(tempFolderList); }}
          />
        )}
-      {state === 'uploadPending' && <UploadForm onUpload={handleUpload} />}
+      {state === 'uploadPending' && <UploadForm onUpload={onUpload} />}
       {state === 'uploading' && <UploadProgress />}
       {(state === 'uploading' || state === 'uploadComplate') && <UploadResult state={state} updateState={updateState} />}
       {state === 'uploading' && <UploadList state={state} fileList={fileList} />}
