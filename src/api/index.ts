@@ -44,3 +44,25 @@ export const uploadFile = (formData: FormData, onUploadProgress = (pv: any) => {
   data: formData,
   onUploadProgress,
 });
+
+// 秒传
+export const quickUpload = (data: {transmissionId: string, fileId: string}) => axios({
+  method: 'POST',
+  url: '/quick-upload',
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data,
+});
+
+// 创建 transmission
+export const createTransmission = (data: {uid: string; description: string; expiration: Date; needPassword: boolean;}) => axios({
+  method: 'POST',
+  url: '/transmission',
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  data,
+});

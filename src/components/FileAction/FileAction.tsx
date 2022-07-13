@@ -1,10 +1,12 @@
 import { usePrevious } from 'ahooks';
 import cn from 'classnames';
+import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 import React, {
   useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { isFileExist } from '@/api';
+import { createTransmission, isFileExist, quickUpload } from '@/api';
 import { IFile, IFolder } from '@/types';
 
 import workerScript from '../../../public/md5Worker';
@@ -33,6 +35,16 @@ interface ReceiveComputedParams {
   }
 }
 
+interface ITransmission {
+  id: string;
+  description: string;
+  has_password: boolean;
+  password: string;
+  expiration: Date;
+  uid: string;
+  share_link: string;
+}
+
 function FileAction() {
   const [state, setState] = useState<State>('normal');
 
@@ -43,6 +55,8 @@ function FileAction() {
   const clearPreUpload = () => {
     setState('normal');
   };
+
+  const [transmission, setTransmission] = useState<ITransmission>();
 
   const [fileList, setFileList] = useState<(IFile | IFolder)[]>([]);
   const fileListLen = useMemo(() => fileList.length, [fileList]);
@@ -184,30 +198,60 @@ function FileAction() {
     addToQueue(needCalcFiles);
   }, [fileListLen]);
 
-  const onUpload = (config: UploadConfig) => {
-    console.log({ config, fileList });
-    updateState('uploading');
+  const uploadFile = (file: IFile) => {
+
   };
 
-  // 校验文件是否存在，是否可以进一步闪传
-  useEffect(() => {
-    if (state !== 'uploading') return;
+  const verifyFile = () => {
     fileList.forEach((item) => {
-      if (item.state === 'prepareForUpload') {
-        if (item.isFolder) {
-          item.files.forEach((file) => {
-            isFileExist({ md5: file.md5 }).then((res) => {
-              console.log(file.name, res);
+      if (item.state !== 'prepareForUpload') return;
+      if (item.isFolder) {
+        item.files.forEach((file) => {
+          isFileExist({ md5: file.md5 }).then((res) => {
+            console.log(file.name, res);
+          });
+        });
+      } else {
+        isFileExist({ md5: item.md5 }).then((res) => {
+          console.log(item.name, res.data.isExist ? '可以秒传' : '不可秒传');
+          if (res.data.isExist) {
+            // 文件已经存在于服务器，直接秒传
+            quickUpload({ transmissionId: '', fileId: res.data.id }).then(() => {
+              // 更新列表
             });
-          });
-        } else {
-          isFileExist({ md5: item.md5 }).then((res) => {
-            console.log(item.name, res);
-          });
-        }
+          }
+          if (!res.data.isExist) {
+            uploadFile(item);
+          }
+        });
       }
     });
-  }, [state, fileList]);
+  };
+
+  const createShareLink = (config: UploadConfig) => {
+    if (!localStorage.uid) {
+      localStorage.uid = nanoid(32);
+    }
+    createTransmission({
+      uid: localStorage.uid,
+      ...config,
+      expiration: new Date(dayjs(new Date()).subtract(+config.expirationTime.split('-')[0], 'day').format()),
+    }).then((res) => {
+      console.log(res);
+      setTransmission(res.data);
+      // verifyFile();
+    });
+  };
+
+  const onUpload = (config: UploadConfig) => {
+    console.log({ config, fileList });
+    if (!transmission) {
+      createShareLink(config);
+    } else {
+      verifyFile();
+    }
+    updateState('uploading');
+  };
 
   return (
     <div className={cn(
