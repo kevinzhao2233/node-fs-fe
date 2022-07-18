@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
 
-const baseURL = 'http://localhost:10001';
+const baseURL = 'http://localhost:10001/api';
 
 export const isFileExist = (data: {md5?: string, id?: string}): AxiosPromise<any> => axios({
   url: '/is-file-exist',
