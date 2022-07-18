@@ -174,6 +174,7 @@ function FileAction() {
     }
   }, [fileList]);
 
+  // 有新文件添加到列表，计算 MD5
   useEffect(() => {
     if (!worker.current) {
       console.error('>> Worker 加载失败');
@@ -230,7 +231,7 @@ function FileAction() {
 
   const createShareLink = (config: UploadConfig) => {
     if (!localStorage.uid) {
-      localStorage.uid = nanoid(32);
+      localStorage.uid = nanoid(16);
     }
     createTransmission({
       uid: localStorage.uid,
