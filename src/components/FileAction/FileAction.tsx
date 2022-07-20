@@ -199,8 +199,18 @@ function FileAction() {
     addToQueue(needCalcFiles);
   }, [fileListLen]);
 
-  const uploadFile = (file: IFile) => {
-
+  const uploadFile = (file: IFile, useQuickUpload: boolean, remoteFileId?: string) => {
+    if (useQuickUpload && remoteFileId) {
+      console.log('--- 秒传可用');
+      // 文件已经存在于服务器，直接秒传
+      quickUpload({ transmissionId: transmission!.id, fileId: remoteFileId }).then((res) => {
+        console.log(res);
+        // TODO 更新列表
+      });
+    }
+    if (!useQuickUpload) {
+      console.log('---秒传不可用');
+    }
   };
 
   const verifyFile = () => {
@@ -213,17 +223,8 @@ function FileAction() {
           });
         });
       } else {
-        isFileExist({ md5: item.md5 }).then((res) => {
-          console.log(item.name, res.data.isExist ? '可以秒传' : '不可秒传');
-          if (res.data.isExist) {
-            // 文件已经存在于服务器，直接秒传
-            quickUpload({ transmissionId: '', fileId: res.data.id }).then(() => {
-              // 更新列表
-            });
-          }
-          if (!res.data.isExist) {
-            uploadFile(item);
-          }
+        isFileExist({ md5: item.md5 }).then(({ data }) => {
+          uploadFile(item, data.isExist, data.file.id);
         });
       }
     });
@@ -238,14 +239,13 @@ function FileAction() {
       ...config,
       expiration: new Date(dayjs(new Date()).subtract(+config.expirationTime.split('-')[0], 'day').format()),
     }).then((res) => {
-      console.log(res);
       setTransmission(res.data);
-      // verifyFile();
+      verifyFile();
     });
   };
 
   const onUpload = (config: UploadConfig) => {
-    console.log({ config, fileList });
+    console.log('即将上传', { config, fileList });
     if (!transmission) {
       createShareLink(config);
     } else {

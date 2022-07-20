@@ -2,7 +2,32 @@ import axios, { AxiosPromise } from 'axios';
 
 const baseURL = 'http://localhost:10001/api';
 
-export const isFileExist = (data: {md5?: string, id?: string}): AxiosPromise<any> => axios({
+const instance = axios.create({
+  baseURL: 'http://localhost:10001/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+interface IResFile {
+  id: string;
+  name: string;
+  ext: string;
+  state: string;
+  mime: string;
+  md5: string;
+  path: string;
+  size: number;
+  upload_time: string;
+  create_at: string;
+}
+
+interface IResIsFileExist {
+  isExist: boolean;
+  file: IResFile
+}
+
+export const isFileExist = (data: {md5?: string, id?: string}): AxiosPromise<IResIsFileExist> => axios({
   url: '/is-file-exist',
   baseURL,
   headers: {
