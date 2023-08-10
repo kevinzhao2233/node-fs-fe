@@ -9,6 +9,6 @@ https://js.design/f/mNDqn3?p=DieVk-KbGj
 https://musetransfer.com/
 
 ## 屏幕截图
-<center>
-  <img src="./docs/img/light.png" width="400"><img src="./docs/img/dark.png" width="400">
-</center>
+
+![明亮主题](./docs/img/light.png)
+![暗黑主题](./docs/img/dark.png)
