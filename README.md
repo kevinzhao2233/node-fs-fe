@@ -9,7 +9,6 @@ https://js.design/f/mNDqn3?p=DieVk-KbGj
 https://musetransfer.com/
 
 ## 屏幕截图
-<div style="display: flex">
-  <img src="./docs/img/light.png" style="flex: 1">
-  <img src="./docs/img/dark.png" style="flex: 1">
-</div>
+<center>
+  <img src="./docs/img/light.png" width="400"><img src="./docs/img/dark.png" width="400">
+</center>
